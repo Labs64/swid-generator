@@ -1,7 +1,7 @@
 # Software Identification (SWID) Tags Generator
 
-[![Stories in Ready](https://badge.waffle.io/Labs64/NetLicensingClient-java.svg?label=ready&title=Ready)](http://waffle.io/Labs64/NetLicensingClient-java)
-[![Build Status](https://travis-ci.org/Labs64/NetLicensingClient-java.svg?branch=master)](https://travis-ci.org/Labs64/NetLicensingClient-java)
+[![Stories in Ready](https://badge.waffle.io/labs64/swid-generator.svg?label=ready&title=Ready)](http://waffle.io/labs64/swid-generator)
+[![Build Status](https://travis-ci.org/Labs64/swid-generator.svg)](https://travis-ci.org/Labs64/swid-generator)
 [![Dependency Status](https://www.versioneye.com/user/projects/53e5e1d735080d5aa50000c6/badge.svg?style=flat)](https://www.versioneye.com/user/projects/53e5e1d735080d5aa50000c6)
 
 Generate Software Identification (SWID) Tags according to [ISO/IEC 19770-2:2009](http://www.iso.org/iso/home/store/catalogue_tc/catalogue_detail.htm?csnumber=53670)
