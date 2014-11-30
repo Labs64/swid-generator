@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:swid="http://standards.iso.org/iso/19770/-2/2009/schema.xsd" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://standards.iso.org/iso/19770/-2/2009/schema.xsd" elementFormDefault="qualified">
+	<xs:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="http://www.w3.org/TR/xmldsig-core/xmldsig-core-schema.xsd"/>
+	<xs:annotation>
+		<xs:documentation>
+			Schema for ISO-IEC 19770-2 Software Identification Tags
+			http://standards.iso.org/iso/19770/-2/2009/schema.xsd
+			
+			Revision:  1.0
+			
+			Copyright 2009 ISO/IEC, all rights reserved
+	
+This XML Scheme Document (XSD) may be accessed, stored, copied and transferred without authorization from ISO or its members on the condition that it is not modified and that there is no charge associated with access to this XSD file. Copyright remains with ISO.
+
+        </xs:documentation>
+	</xs:annotation>
+	<!-- Root tag -->
+	<xs:element name="software_identification_tag" type="swid:SoftwareIdentificationTagComplexType"/>
+	<!-- Software Asset Tag structure definition -->
+	<xs:complexType name="SoftwareIdentificationTagComplexType">
+		<xs:sequence>
+			<!-- Mandatory Elements -->
+			<xs:element name="entitlement_required_indicator" type="swid:Boolean"/>
+			<xs:element name="product_title" type="swid:Token"/>
+			<xs:element name="product_version" type="swid:ProductVersionComplexType"/>
+			<xs:element name="software_creator" type="swid:EntityComplexType"/>
+			<xs:element name="software_licensor" type="swid:EntityComplexType"/>
+			<xs:element name="software_id" type="swid:SoftwareIdComplexType"/>
+			<xs:element name="tag_creator" type="swid:EntityComplexType"/>
+			<!-- Optional Elements -->
+			<xs:element name="abstract" type="swid:AbstractComplexType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="component_of" type="swid:ListOfSoftwareIdsComplexType" minOccurs="0"/>
+			<xs:element name="complex_of" type="swid:ListOfSoftwareIdsComplexType" minOccurs="0"/>
+			<xs:element name="data_source" type="swid:Token" minOccurs="0"/>
+			<xs:element name="dependency" type="swid:ListOfSoftwareIdsComplexType" minOccurs="0"/>
+			<xs:element name="elements_owner" type="swid:ElementsOwnerComplexType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="installation_details" type="swid:InstallationDetailsComplexType" minOccurs="0"/>
+			<xs:element name="keywords" type="swid:KeywordsComplexType" minOccurs="0"/>
+			<xs:element name="license_linkage" type="swid:LicenseLinkageComplexType" minOccurs="0"/>
+			<xs:element name="package_footprint" type="swid:PackageFootprintComplexType" minOccurs="0"/>
+			<xs:element name="packager" type="swid:PackagerComplexType" minOccurs="0"/>
+			<xs:element name="product_category" type="swid:CategoryComplexType" minOccurs="0"/>
+			<xs:element name="product_family" type="swid:Token" minOccurs="0"/>
+			<xs:element name="product_id" type="swid:Token" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="release_date" type="swid:DateTime" minOccurs="0"/>
+			<xs:element name="release_id" type="swid:Token" minOccurs="0"/>
+			<xs:element name="release_package" type="swid:ReleaseComplexType" minOccurs="0"/>
+			<xs:element name="release_rollout" type="swid:ReleaseComplexType" minOccurs="0"/>
+			<xs:element name="release_verification" type="swid:ReleaseComplexType" minOccurs="0"/>
+			<xs:element name="serial_number" type="swid:Token" minOccurs="0"/>
+			<xs:element name="sku" type="swid:Token" minOccurs="0"/>
+			<xs:element name="software_creator_alias" type="swid:EntityDataComplexType" minOccurs="0"/>
+			<xs:element name="software_licensor_alias" type="swid:EntityDataComplexType" minOccurs="0"/>
+			<xs:element name="supported_languages" type="swid:SupportedLanguagesComplexType" minOccurs="0"/>
+			<xs:element name="tag_creator_alias" type="swid:EntityDataComplexType" minOccurs="0"/>
+			<xs:element name="tag_creator_copyright" type="swid:TagCreatorCopyrightComplexType" minOccurs="0"/>
+			<xs:element name="tag_version" type="swid:TagVersionComplexType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="upgrade_for" type="swid:UpgradeForComplexType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="usage_identifier" type="swid:UsageComplexType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="validation" type="swid:ValidationComplexType" minOccurs="0"/>
+			<xs:element ref="ds:Signature" minOccurs="0" maxOccurs="unbounded"/>
+			<!--Extended Information -->
+			<xs:element name="extended_information" type="swid:ExtendedInformationComplexType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="swid:default"/>
+	</xs:complexType>
+	<!-- Mandatory Elements complex types -->
+	<xs:complexType name="ProductVersionComplexType">
+		<xs:sequence>
+			<xs:element name="name" type="swid:Token"/>
+			<xs:element name="numeric" type="swid:NumericVersionComplexType"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="swid:default"/>
+	</xs:complexType>
+	<xs:complexType name="EntityComplexType">
+		<xs:sequence>
+			<xs:element name="name" type="swid:Token"/>
+			<xs:element name="regid" type="swid:RegistrationId"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="swid:default"/>
+	</xs:complexType>
+	<xs:complexType name="SoftwareIdComplexType">
+		<xs:sequence>
+			<xs:element name="unique_id" type="swid:Token"/>
+			<xs:element name="tag_creator_regid" type="swid:RegistrationId"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="swid:default"/>
+	</xs:complexType>
+	<!-- Optional Elements complex types -->
+	<xs:complexType name="AbstractComplexType">
+		<xs:simpleContent>
+			<xs:extension base="swid:String">
+				<xs:attribute name="lang" type="xs:token" use="optional" default="en"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="ListOfSoftwareIdsComplexType">
+		<xs:sequence>
+			<xs:element name="software_id" type="swid:SoftwareIdComplexType" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="swid:default"/>
+	</xs:complexType>
+	<xs:complexType name="ElementsOwnerComplexType">
+		<xs:sequence>
+			<xs:element name="owner_name" type="swid:Token" minOccurs="0"/>
+			<xs:element name="owner_regid" type="swid:RegistrationId"/>
+			<xs:element name="element_id" type="swid:IDREF" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="swid:default"/>
+	</xs:complexType>
+	<xs:complexType name="InstallationDetailsComplexType">
+		<xs:sequence>
+			<xs:element name="location_platform" type="swid:Token" minOccurs="0"/>
+			<xs:element name="location_installation" type="swid:Token" minOccurs="0"/>
+			<xs:element name="installation_instance" type="swid:Token" minOccurs="0"/>
+			<xs:element name="installation_locale" type="swid:Token" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="installation_target_id" type="swid:Token" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="swid:default"/>
+	</xs:complexType>
+	<xs:complexType name="KeywordsComplexType">
+		<xs:sequence>
+			<xs:element name="keyword" type="swid:Token" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="swid:default"/>
+	</xs:complexType>
+	<xs:complexType name="LicenseLinkageComplexType">
+		<xs:sequence>
+			<xs:element name="activation_status" type="swid:Token" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="channel_type" type="swid:Token" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="channel_name" type="swid:Token" minOccurs="0"/>
+			<xs:element name="customer_type" type="swid:Token" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="swid:default"/>
+	</xs:complexType>
+	<xs:complexType name="PackageFootprintComplexType">
+		<xs:choice>
+			<xs:element name="external_description" type="swid:AnyURI"/>
+			<xs:sequence>
+				<xs:element name="primary" type="swid:PackageFootprintModuleComplexType" minOccurs="0"/>
+				<xs:element name="secondary" type="swid:PackageFootprintModuleComplexType" minOccurs="0"/>
+				<xs:element name="related" type="swid:PackageFootprintModuleComplexType" minOccurs="0"/>
+			</xs:sequence>
+		</xs:choice>
+		<xs:attributeGroup ref="swid:default"/>
+	</xs:complexType>
+	<xs:complexType name="PackageFootprintModuleComplexType">
+		<xs:choice>
+			<xs:element name="referenced" type="swid:AnyURI"/>
+			<xs:sequence>
+				<xs:element name="file" type="swid:PackageFootprintFileComplexType" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element name="os_configuration_record" type="swid:PackageFootprintOsConfigurationRecordComplexType" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element name="other" type="swid:PackageFootprintOtherComplexType" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:choice>
+		<xs:attributeGroup ref="swid:default"/>
+	</xs:complexType>
+	<xs:complexType name="PackageFootprintFileComplexType">
+		<xs:sequence>
+			<xs:element name="name" type="swid:Token"/>
+			<xs:element name="size" type="swid:UInt" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="md5" type="swid:MD5" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="version" type="swid:Token" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="other" type="swid:PackageFootprintOtherParamComplexType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="swid:default"/>
+	</xs:complexType>
+	<xs:complexType name="PackageFootprintOsConfigurationRecordComplexType">
+		<xs:sequence>
+			<xs:element name="type" type="swid:Token"/>
+			<xs:element name="path" type="swid:Token" minOccurs="0"/>
+			<xs:element name="name" type="swid:Token" minOccurs="0"/>
+			<xs:element name="internal_path" type="swid:Token" minOccurs="0"/>
+			<xs:element name="entry" type="swid:ConfigEntryFootprintComplexType" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="swid:default"/>
+	</xs:complexType>
+	<xs:complexType name="ConfigEntryFootprintComplexType">
+		<xs:sequence>
+			<xs:element name="name" type="swid:Token" minOccurs="0"/>
+			<xs:element name="value" type="swid:Token" minOccurs="0"/>
+			<xs:element name="type" type="swid:Token" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="swid:default"/>
+	</xs:complexType>
+	<xs:complexType name="PackageFootprintOtherComplexType">
+		<xs:sequence>
+			<xs:element name="param" type="swid:PackageFootprintOtherParamComplexType" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="type" type="xs:token" use="required"/>
+		<xs:attributeGroup ref="swid:default"/>
+	</xs:complexType>
+	<xs:complexType name="PackageFootprintOtherParamComplexType">
+		<xs:simpleContent>
+			<xs:extension base="swid:Token">
+				<xs:attribute name="name" type="xs:token" use="required"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="PackagerComplexType">
+		<xs:sequence>
+			<xs:element name="by" type="swid:Token"/>
+			<xs:element name="part" type="swid:Token"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="swid:default"/>
+	</xs:complexType>
+	<xs:complexType name="CategoryComplexType">
+		<xs:sequence>
+			<xs:element name="UNSPSC_ver" type="swid:Token"/>
+			<xs:element name="segment_title" type="swid:Token"/>
+			<xs:element name="family_title" type="swid:Token"/>
+			<xs:element name="class_title" type="swid:Token"/>
+			<xs:element name="commodity_title" type="swid:Token"/>
+			<xs:element name="code" type="swid:UnspscIdType"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="swid:default"/>
+	</xs:complexType>
+	<xs:complexType name="ReleaseComplexType">
+		<xs:sequence>
+			<xs:element name="sign_off" type="swid:Token"/>
+			<xs:element name="sign_off_date" type="swid:DateTime"/>
+			<xs:element name="by" type="swid:Token"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="swid:default"/>
+	</xs:complexType>
+	<xs:complexType name="SupportedLanguagesComplexType">
+		<xs:sequence>
+			<xs:element name="language" type="swid:Token" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="swid:default"/>
+	</xs:complexType>
+	<xs:complexType name="EntityDataComplexType">
+		<xs:sequence>
+			<xs:element name="alias" type="swid:AliasDetailsComplexType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="swid:default"/>
+	</xs:complexType>
+	<xs:complexType name="AliasDetailsComplexType">
+		<xs:sequence>
+			<xs:element name="alias_name" type="swid:Token"/>
+			<xs:element name="alias_regid" type="swid:RegistrationId"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="swid:default"/>
+	</xs:complexType>
+	<xs:complexType name="TagCreatorCopyrightComplexType">
+		<xs:simpleContent>
+			<xs:extension base="swid:String">
+				<xs:attribute name="lang" type="xs:token" use="optional" default="en"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="TagVersionComplexType">
+		<xs:sequence>
+			<xs:element name="name" type="swid:Token"/>
+			<xs:element name="regid" type="swid:RegistrationId"/>
+			<xs:element name="numeric_version" type="swid:NumericVersionComplexType"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="swid:default"/>
+	</xs:complexType>
+	<xs:complexType name="UpgradeForComplexType">
+		<xs:sequence>
+			<xs:element name="upgrade_id" type="swid:SoftwareIdComplexType" maxOccurs="unbounded"/>
+			<xs:element name="upgrade_description" type="swid:String" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="swid:default"/>
+	</xs:complexType>
+	<xs:complexType name="UsageComplexType">
+		<xs:sequence>
+			<xs:element name="filename" type="swid:Token" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="processname" type="swid:UsageDetailComplexType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="URI" type="swid:UsageDetailComplexType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="swid:default"/>
+	</xs:complexType>
+	<xs:complexType name="ValidationComplexType">
+		<xs:sequence>
+			<xs:element name="validation_call" type="swid:Token"/>
+			<xs:element name="last_validated_by" type="swid:Token" minOccurs="0"/>
+			<xs:element name="last_validated_date" type="swid:DateTime" minOccurs="0"/>
+			<xs:element name="last_validated_result" type="swid:Token" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="swid:default"/>
+	</xs:complexType>
+	<!-- Extended Information type definition -->
+	<xs:complexType name="ExtendedInformationComplexType">
+		<xs:sequence>
+			<xs:any minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="swid:default"/>
+	</xs:complexType>
+	<!-- Other complex types -->
+	<xs:complexType name="NumericVersionComplexType">
+		<xs:sequence>
+			<xs:element name="major" type="swid:UInt"/>
+			<xs:element name="minor" type="swid:UInt"/>
+			<xs:element name="build" type="swid:UInt"/>
+			<xs:element name="review" type="swid:UInt"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="swid:default"/>
+	</xs:complexType>
+	<xs:complexType name="UsageDetailComplexType">
+		<xs:simpleContent>
+			<xs:extension base="swid:Token">
+				<xs:attribute name="type" use="optional" default="literal">
+					<xs:simpleType>
+						<xs:restriction base="xs:token">
+							<xs:enumeration value="literal"/>
+							<xs:enumeration value="regexp"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="GUIDType">
+		<xs:simpleContent>
+			<xs:restriction base="swid:Token">
+				<xs:pattern value="[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}"/>
+			</xs:restriction>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="UnspscIdType">
+		<xs:simpleContent>
+			<xs:restriction base="swid:ULong">
+				<xs:pattern value="[0-9]{8}"/>
+			</xs:restriction>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="MD5">
+		<xs:simpleContent>
+			<xs:restriction base="swid:HexBinary">
+				<xs:length value="16"/>
+			</xs:restriction>
+		</xs:simpleContent>
+	</xs:complexType>
+	<!-- Complex types for simple types + attributes -->
+	<xs:complexType name="RegistrationId">
+		<xs:simpleContent>
+			<xs:restriction base="swid:Token">
+				<xs:pattern value="regid\.[0-9]{4}-((0[1-9])|(1[0-2]))\.[a-zA-Z]{2,63}(\.[a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?)+(,.+)?"/>
+			</xs:restriction>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:attributeGroup name="default">
+		<xs:attribute name="id" type="xs:ID" use="optional"/>
+	</xs:attributeGroup>
+	<xs:complexType name="String">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attributeGroup ref="swid:default"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="Token">
+		<xs:simpleContent>
+			<xs:extension base="xs:token">
+				<xs:attributeGroup ref="swid:default"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="IDREF">
+		<xs:simpleContent>
+			<xs:extension base="xs:IDREF">
+				<xs:attributeGroup ref="swid:default"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="Boolean">
+		<xs:simpleContent>
+			<xs:extension base="xs:boolean">
+				<xs:attributeGroup ref="swid:default"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="UInt">
+		<xs:simpleContent>
+			<xs:extension base="xs:unsignedInt">
+				<xs:attributeGroup ref="swid:default"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="ULong">
+		<xs:simpleContent>
+			<xs:extension base="xs:unsignedLong">
+				<xs:attributeGroup ref="swid:default"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="HexBinary">
+		<xs:simpleContent>
+			<xs:extension base="xs:hexBinary">
+				<xs:attributeGroup ref="swid:default"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="DateTime">
+		<xs:simpleContent>
+			<xs:extension base="xs:dateTime">
+				<xs:attributeGroup ref="swid:default"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="AnyURI">
+		<xs:simpleContent>
+			<xs:extension base="xs:anyURI">
+				<xs:attributeGroup ref="swid:default"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+</xs:schema>
