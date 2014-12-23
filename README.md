@@ -10,7 +10,7 @@ Generate SoftWare IDentification (SWID) Tags according to [ISO/IEC 19770-2:2009]
 
 The recommended way to get started using [`swid-generator`](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.labs64.utils%22) in your project is with a dependency management system – the Maven snippet below can be copied and pasted into your build.
 
-```pom
+```xml
 <dependencies>
   <dependency>
     <groupId>com.labs64.utils</groupId>
