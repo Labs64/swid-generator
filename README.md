@@ -10,7 +10,7 @@ Generate SoftWare IDentification (SWID) Tags according to [ISO/IEC 19770-2:2009]
 
 The recommended way to get started using [`swid-generator`](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.labs64.utils%22) in your project is by adding it as dependency in your build system:
 
-Maven
+Maven:
 ```xml
 <dependencies>
   <dependency>
@@ -20,7 +20,7 @@ Maven
   </dependency>
 </dependencies>
 ```
-Gradle
+Gradle:
 ```gradle
 dependencies {
     compile 'com.labs64.utils:swid-generator:0.1.0'
@@ -90,4 +90,4 @@ System.out.println(out);
 
 ## Compatibility
 
-This library requires J2SE 1.6+. All dependencies are handled by Maven.
+This library requires J2SE 1.6 or never. All dependencies are handled by Maven.
