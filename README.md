@@ -22,8 +22,7 @@ The recommended way to get started using [`swid-generator`](http://search.maven.
 
 ## Examples
 
-To generate SWID Tag please use this example:
-
+To generate SoftWare IDentification (SWID) Tag please use this example ([gist](https://gist.github.com/r-brown/9fe6fa117131a82ae2d9)):
 ```java
 // prepare SWID Tag processor
 SwidProcessor processor = new DefaultSwidProcessor();
@@ -45,6 +44,40 @@ StringWriter out = new StringWriter();
 writer.write(swidTag, out);
 
 System.out.println(out);
+```
+
+...this generates following SoftWare IDentification (SWID) Tag:
+```xml
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<software_identification_tag xmlns:ns2="http://www.w3.org/2000/09/xmldsig#" xmlns="http://standards.iso.org/iso/19770/-2/2009/schema.xsd">
+    <entitlement_required_indicator>true</entitlement_required_indicator>
+    <product_title>NetLicensing</product_title>
+    <product_version>
+        <name>2.2.0</name>
+        <numeric>
+            <major>2</major>
+            <minor>2</minor>
+            <build>0</build>
+            <review>0</review>
+        </numeric>
+    </product_version>
+    <software_creator>
+        <name>Labs64</name>
+        <regid>regid.2010-01.com.labs64</regid>
+    </software_creator>
+    <software_licensor>
+        <name>Labs64</name>
+        <regid>regid.2010-01.com.labs64</regid>
+    </software_licensor>
+    <software_id>
+        <unique_id>NLIC</unique_id>
+        <tag_creator_regid>regid.2010-01.com.labs64</tag_creator_regid>
+    </software_id>
+    <tag_creator>
+        <name>Labs64</name>
+        <regid>regid.2010-01.com.labs64</regid>
+    </tag_creator>
+</software_identification_tag>
 ```
 
 ## Compatibility
