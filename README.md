@@ -19,3 +19,34 @@ The recommended way to get started using [`swid-generator`](http://search.maven.
   </dependency>
 </dependencies>
 ```
+
+### Examples
+
+To generate SWID Tag please use this example:
+
+```
+// prepare SWID Tag processor
+SwidProcessor processor = new DefaultSwidProcessor();
+((DefaultSwidProcessor) processor).setEntitlementRequiredIndicator(true)
+        .setProductTitle("NetLicensing")
+        .setProductVersion("2.2.0", 2, 2, 0, 0)
+        .setSoftwareCreator("Labs64", "regid.2010-01.com.labs64")
+        .setSoftwareLicensor("Labs64", "regid.2010-01.com.labs64")
+        .setSoftwareId("NLIC", "regid.2010-01.com.labs64")
+        .setTagCreator("Labs64", "regid.2010-01.com.labs64");
+
+// create builder and pass processor as build param
+SwidBuilder builder = new SwidBuilder();
+SoftwareIdentificationTagComplexType swidTag = builder.build(processor);
+
+// output resulting object
+SwidWriter writer = new SwidWriter();
+StringWriter out = new StringWriter();
+writer.write(swidTag, out);
+
+System.out.println(out);
+```
+
+### Compatibility
+
+This library is compatible with J2SE 1.6 or newer. All dependencies are handled by Maven.

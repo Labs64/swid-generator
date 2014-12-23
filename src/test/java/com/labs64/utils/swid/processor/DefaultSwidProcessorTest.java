@@ -12,30 +12,60 @@
  */
 package com.labs64.utils.swid.processor;
 
+import org.iso.standards.iso._19770.__2._2009.schema.ObjectFactory;
+import org.iso.standards.iso._19770.__2._2009.schema.SoftwareIdentificationTagComplexType;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import static org.junit.Assert.assertTrue;
+import com.labs64.utils.swid.exception.SwidException;
+import com.labs64.utils.swid.support.JAXBUtils;
+
+import static org.junit.Assert.assertNotNull;
 
 /**
  */
 public class DefaultSwidProcessorTest {
 
-    private static DefaultSwidProcessor underTest;
+    private static ObjectFactory objectFactory;
+
+    private DefaultSwidProcessor underTest;
 
     @BeforeClass
     public static void setup() {
-        underTest = new DefaultSwidProcessor();
+        objectFactory = new ObjectFactory();
     }
 
     @Before
     public void setUp() {
+        underTest = new DefaultSwidProcessor();
+    }
+
+    @Test(expected = SwidException.class)
+    public void testProcessorEmpty() {
+        underTest.process();
+    }
+
+    @Test(expected = SwidException.class)
+    public void testProcessorIncomplete() {
+        underTest.setEntitlementRequiredIndicator(true)
+                .setProductTitle("NetLicensing");
+        underTest.process();
     }
 
     @Test
-    public void testBuild() {
-        assertTrue(true);
+    public void testProcessorFull() {
+        underTest.setEntitlementRequiredIndicator(true)
+                .setProductTitle("NetLicensing")
+                .setProductVersion("2.2.0", 2, 2, 0, 0)
+                .setSoftwareCreator("Labs64", "regid.2010-01.com.labs64")
+                .setSoftwareLicensor("Labs64", "regid.2010-01.com.labs64")
+                .setSoftwareId("NLIC", "regid.2010-01.com.labs64")
+                .setTagCreator("Labs64", "regid.2010-01.com.labs64");
+        SoftwareIdentificationTagComplexType swidElement = underTest.process();
+        assertNotNull(swidElement);
+        final String out = JAXBUtils.writeObjectToString(objectFactory.createSoftwareIdentificationTag(swidElement));
+        System.out.println(out);
     }
 
 }

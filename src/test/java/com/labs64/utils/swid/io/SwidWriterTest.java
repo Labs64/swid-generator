@@ -47,7 +47,7 @@ public class SwidWriterTest {
 
     @Test
     public void testWriteFile() {
-        File destination = new File("target/swid-lib-labs64_test.swtag");
+        File destination = new File("target/regid.2010-64.com.labs64_swidlib_test.swidtag");
         underTest.write(new SoftwareIdentificationTagComplexType(), destination);
         assertTrue(destination.length() > 0);
     }
