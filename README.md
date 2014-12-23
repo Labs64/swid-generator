@@ -8,8 +8,9 @@ Generate SoftWare IDentification (SWID) Tags according to [ISO/IEC 19770-2:2009]
 
 ## Quick Start
 
-The recommended way to get started using [`swid-generator`](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.labs64.utils%22) in your project is with a dependency management system – the Maven snippet below can be copied and pasted into your build.
+The recommended way to get started using [`swid-generator`](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.labs64.utils%22) in your project is by adding it as dependency in your build system:
 
+Maven
 ```xml
 <dependencies>
   <dependency>
@@ -19,10 +20,17 @@ The recommended way to get started using [`swid-generator`](http://search.maven.
   </dependency>
 </dependencies>
 ```
+Gradle
+```gradle
+dependencies {
+    compile 'com.labs64.utils:swid-generator:0.1.0'
+}
+```
+
 
 ## Examples
 
-To generate SoftWare IDentification (SWID) Tag please use this example ([gist](https://gist.github.com/r-brown/9fe6fa117131a82ae2d9)):
+To generate SoftWare IDentification (SWID) Tag ([gist](https://gist.github.com/r-brown/9fe6fa117131a82ae2d9)):
 ```java
 // prepare SWID Tag processor
 SwidProcessor processor = new DefaultSwidProcessor();
@@ -46,7 +54,7 @@ writer.write(swidTag, out);
 System.out.println(out);
 ```
 
-...this generates following SoftWare IDentification (SWID) Tag:
+...this generates the following SoftWare IDentification (SWID) Tag:
 ```xml
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <software_identification_tag xmlns:ns2="http://www.w3.org/2000/09/xmldsig#" xmlns="http://standards.iso.org/iso/19770/-2/2009/schema.xsd">
@@ -82,4 +90,4 @@ System.out.println(out);
 
 ## Compatibility
 
-This library is compatible with J2SE 1.6 or newer. All dependencies are handled by Maven.
+This library requires J2SE 1.6+. All dependencies are handled by Maven.
