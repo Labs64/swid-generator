@@ -1,0 +1,93 @@
+/* Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package com.labs64.utils.swid.support;
+
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+import com.labs64.utils.swid.exception.SwidException;
+
+import static org.junit.Assert.assertEquals;
+
+/**
+ */
+public class SwidUtilsTest {
+
+    @BeforeClass
+    public static void setup() {
+    }
+
+    @Before
+    public void setUp() {
+    }
+
+    @Test
+    public void testGenerateRegId() {
+        assertEquals("regid.2010-04.com.labs64", SwidUtils.generateRegId("2010-04", "com.labs64"));
+    }
+
+    @Test(expected = SwidException.class)
+    public void testGenerateRegIdNull() {
+        assertEquals("regid.null.null", SwidUtils.generateRegId(null, null));
+    }
+
+    @Test(expected = SwidException.class)
+    public void testGenerateRegIdEmpty() {
+        assertEquals("regid..", SwidUtils.generateRegId("", ""));
+    }
+
+    @Test
+    public void testGenerateRegIdSuffix() {
+        assertEquals("regid.2010-04.com.labs64,NLIC", SwidUtils.generateRegId("2010-04", "com.labs64", "NLIC"));
+    }
+
+    @Test
+    public void testGenerateSwidFileName() {
+        final String regid = SwidUtils.generateRegId("2010-04", "com.labs64");
+        assertEquals("regid.2010-04.com.labs64_NetLicensing-220.swidtag",
+                SwidUtils.generateSwidFileName(regid, "NetLicensing", "220"));
+    }
+
+    @Test
+    public void testGenerateSwidFileNameExtension() {
+        final String regid = SwidUtils.generateRegId("2010-04", "com.labs64");
+        assertEquals("regid.2010-04.com.labs64_NetLicensing-220.swidtag",
+                SwidUtils.generateSwidFileName(regid, "NetLicensing", "220", SwidUtils.SWIDTAG_FILE_EXTENSION));
+    }
+
+    @Test
+    public void testRevertDomainName() {
+        assertEquals("com.labs64", SwidUtils.revertDomainName("http://www.labs64.com"));
+        assertEquals("com.labs64", SwidUtils.revertDomainName("http://www.labs64.com/"));
+        assertEquals("com.labs64", SwidUtils.revertDomainName("https://www.labs64.com/"));
+        assertEquals("com.labs64", SwidUtils.revertDomainName("www.labs64.com"));
+        assertEquals("com.labs64", SwidUtils.revertDomainName("labs64.com"));
+        assertEquals("com.labs64", SwidUtils.revertDomainName("http://www.labs64.com/netlicensing"));
+        assertEquals("com.labs64", SwidUtils.revertDomainName("http://www.labs64.com#netlicensing"));
+        assertEquals("com.labs64", SwidUtils.revertDomainName("http://www.labs64.com?netlicensing"));
+        assertEquals("com.labs64.netlicensing", SwidUtils.revertDomainName("netlicensing.labs64.com"));
+        assertEquals("com.labs64.netlicensing", SwidUtils.revertDomainName("http://netlicensing.labs64.com"));
+    }
+
+    @Test(expected = SwidException.class)
+    public void testRevertDomainNameNull() {
+        SwidUtils.revertDomainName(null);
+    }
+
+    @Test(expected = SwidException.class)
+    public void testRevertDomainNameEmpty() {
+        SwidUtils.revertDomainName("");
+    }
+
+}

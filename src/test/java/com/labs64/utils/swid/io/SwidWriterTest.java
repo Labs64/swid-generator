@@ -21,6 +21,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import com.labs64.utils.swid.support.SwidUtils;
+
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -47,7 +49,9 @@ public class SwidWriterTest {
 
     @Test
     public void testWriteFile() {
-        File destination = new File("target/regid.2010-64.com.labs64_swidlib_test.swidtag");
+        final String regid = SwidUtils.generateRegId("2010-04", "com.labs64");
+        final String tagFile = SwidUtils.generateSwidFileName(regid, "NetLicensing", "220");
+        File destination = new File("target/" + tagFile);
         underTest.write(new SoftwareIdentificationTagComplexType(), destination);
         assertTrue(destination.length() > 0);
     }

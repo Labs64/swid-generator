@@ -20,6 +20,7 @@ import org.junit.Test;
 
 import com.labs64.utils.swid.exception.SwidException;
 import com.labs64.utils.swid.support.JAXBUtils;
+import com.labs64.utils.swid.support.SwidUtils;
 
 import static org.junit.Assert.assertNotNull;
 
@@ -55,13 +56,14 @@ public class DefaultSwidProcessorTest {
 
     @Test
     public void testProcessorFull() {
+        final String regid = SwidUtils.generateRegId("2010-04", "com.labs64");
         underTest.setEntitlementRequiredIndicator(true)
                 .setProductTitle("NetLicensing")
                 .setProductVersion("2.2.0", 2, 2, 0, 0)
-                .setSoftwareCreator("Labs64", "regid.2010-01.com.labs64")
-                .setSoftwareLicensor("Labs64", "regid.2010-01.com.labs64")
-                .setSoftwareId("NLIC", "regid.2010-01.com.labs64")
-                .setTagCreator("Labs64", "regid.2010-01.com.labs64");
+                .setSoftwareCreator("Labs64", regid)
+                .setSoftwareLicensor("Labs64", regid)
+                .setSoftwareId("NLIC", regid)
+                .setTagCreator("Labs64", regid);
         SoftwareIdentificationTagComplexType swidElement = underTest.process();
         assertNotNull(swidElement);
         final String out = JAXBUtils.writeObjectToString(objectFactory.createSoftwareIdentificationTag(swidElement));

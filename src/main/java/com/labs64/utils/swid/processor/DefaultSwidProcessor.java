@@ -167,10 +167,10 @@ public class DefaultSwidProcessor implements SwidProcessor {
      * Identifies the tag creator (tag_creator).
      * </p>
      * <p>
-     * Example data format: <i>“regid.2010-01.com.labs64,NLIC”</i> where:
+     * Example data format: <i>“regid.2010-04.com.labs64,NLIC”</i> where:
      * <ul>
      * <li>regid = registered id</li>
-     * <li>2010-01 = the year and first month the domain was registered (yyyy-mm)</li>
+     * <li>2010-04 = the year and first month the domain was registered (yyyy-mm)</li>
      * <li>com = the upper level domain</li>
      * <li>labs64 = the domain name</li>
      * <li>NLIC = the name of the business unit (BU) that created the SWID tag</li>

@@ -37,10 +37,10 @@ SwidProcessor processor = new DefaultSwidProcessor();
 ((DefaultSwidProcessor) processor).setEntitlementRequiredIndicator(true)
         .setProductTitle("NetLicensing")
         .setProductVersion("2.2.0", 2, 2, 0, 0)
-        .setSoftwareCreator("Labs64", "regid.2010-01.com.labs64")
-        .setSoftwareLicensor("Labs64", "regid.2010-01.com.labs64")
-        .setSoftwareId("NLIC", "regid.2010-01.com.labs64")
-        .setTagCreator("Labs64", "regid.2010-01.com.labs64");
+        .setSoftwareCreator("Labs64", "regid.2010-04.com.labs64")
+        .setSoftwareLicensor("Labs64", "regid.2010-04.com.labs64")
+        .setSoftwareId("NLIC", "regid.2010-04.com.labs64")
+        .setTagCreator("Labs64", "regid.2010-04.com.labs64");
 
 // create builder and pass processor as build param
 SwidBuilder builder = new SwidBuilder();
@@ -71,19 +71,19 @@ System.out.println(out);
     </product_version>
     <software_creator>
         <name>Labs64</name>
-        <regid>regid.2010-01.com.labs64</regid>
+        <regid>regid.2010-04.com.labs64</regid>
     </software_creator>
     <software_licensor>
         <name>Labs64</name>
-        <regid>regid.2010-01.com.labs64</regid>
+        <regid>regid.2010-04.com.labs64</regid>
     </software_licensor>
     <software_id>
         <unique_id>NLIC</unique_id>
-        <tag_creator_regid>regid.2010-01.com.labs64</tag_creator_regid>
+        <tag_creator_regid>regid.2010-04.com.labs64</tag_creator_regid>
     </software_id>
     <tag_creator>
         <name>Labs64</name>
-        <regid>regid.2010-01.com.labs64</regid>
+        <regid>regid.2010-04.com.labs64</regid>
     </tag_creator>
 </software_identification_tag>
 ```
