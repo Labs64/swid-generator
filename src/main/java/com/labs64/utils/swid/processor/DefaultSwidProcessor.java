@@ -32,21 +32,25 @@ public class DefaultSwidProcessor implements SwidProcessor {
 
     protected final SoftwareIdentificationTagComplexType swidTag;
 
+    protected final IdGenerator idGenerator;
+
     /**
      * Creates SWID Tag default processor.
      */
     public DefaultSwidProcessor() {
+        idGenerator = new NullIdGenerator();
         swidTag = new SoftwareIdentificationTagComplexType();
+        swidTag.setId(idGenerator.nextId());
     }
 
     /**
      * <p>
-     * Identifies whether this application needs to match up with an entitlement for a reconciliation to be considered
-     * successful (entitlement_required_indicator).
+     * Identifies whether this product needs to match up with an entitlement for a reconciliation to be considered
+     * successful (tag: entitlement_required_indicator).
      * </p>
      * <p>
-     * Specifies if an entitlement is required to reconcile this application. Example data format: XX = entitlement
-     * status (<code>true</code> = entitlement required; <code>false</code> = no entitlement required).
+     * Specifies if an entitlement is required to reconcile this product. Example data format: XX = entitlement status (
+     * <code>true</code> = entitlement required; <code>false</code> = no entitlement required).
      * </p>
      * 
      * @param entitlementRequiredIndicator
@@ -55,13 +59,14 @@ public class DefaultSwidProcessor implements SwidProcessor {
      */
     public DefaultSwidProcessor setEntitlementRequiredIndicator(final boolean entitlementRequiredIndicator) {
         swidTag.setEntitlementRequiredIndicator(
-                new org.iso.standards.iso._19770.__2._2009.schema.Boolean(entitlementRequiredIndicator, NULL_ID));
+                new org.iso.standards.iso._19770.__2._2009.schema.Boolean(entitlementRequiredIndicator, idGenerator
+                        .nextId()));
         return this;
     }
 
     /**
      * <p>
-     * Accurately identifies the application (product_title).
+     * Accurately identifies the product (tag: product_title).
      * </p>
      * 
      * @param productTitle
@@ -70,12 +75,12 @@ public class DefaultSwidProcessor implements SwidProcessor {
      */
     public DefaultSwidProcessor setProductTitle(final String productTitle) {
         swidTag.setProductTitle(
-                new Token(productTitle, NULL_ID));
+                new Token(productTitle, idGenerator.nextId()));
         return this;
     }
 
     /**
-     * Identifies the application version (product_version) using two values – numeric version and version string.
+     * Identifies the product version (tag: product_version) using two values – numeric version and version string.
      * 
      * @param productVersion
      *            product version
@@ -95,19 +100,19 @@ public class DefaultSwidProcessor implements SwidProcessor {
             final long productVersionBuild,
             final long productVersionReview) {
         final NumericVersionComplexType numericVersion = new NumericVersionComplexType(
-                new UInt(productVersionMajor, NULL_ID),
-                new UInt(productVersionMinor, NULL_ID),
-                new UInt(productVersionBuild, NULL_ID),
-                new UInt(productVersionReview, NULL_ID),
-                NULL_ID);
+                new UInt(productVersionMajor, idGenerator.nextId()),
+                new UInt(productVersionMinor, idGenerator.nextId()),
+                new UInt(productVersionBuild, idGenerator.nextId()),
+                new UInt(productVersionReview, idGenerator.nextId()),
+                idGenerator.nextId());
         swidTag.setProductVersion(
                 new ProductVersionComplexType(
-                        new Token(productVersion, NULL_ID), numericVersion, NULL_ID));
+                        new Token(productVersion, idGenerator.nextId()), numericVersion, idGenerator.nextId()));
         return this;
     }
 
     /**
-     * Identifies the creator of the software (software_creator).
+     * Identifies the creator of the software (tag: software_creator).
      * 
      * @param softwareCreatorName
      *            software creator name
@@ -118,14 +123,14 @@ public class DefaultSwidProcessor implements SwidProcessor {
     public DefaultSwidProcessor setSoftwareCreator(final String softwareCreatorName, final String softwareCreatorRegId) {
         swidTag.setSoftwareCreator(
                 new EntityComplexType(
-                        new Token(softwareCreatorName, NULL_ID),
-                        new RegistrationId(softwareCreatorRegId, NULL_ID),
-                        NULL_ID));
+                        new Token(softwareCreatorName, idGenerator.nextId()),
+                        new RegistrationId(softwareCreatorRegId, idGenerator.nextId()),
+                        idGenerator.nextId()));
         return this;
     }
 
     /**
-     * Identifies the licensor of the software (software_licensor).
+     * Identifies the licensor of the software (tag: software_licensor).
      * 
      * @param softwareLicensorName
      *            software licensor name
@@ -137,14 +142,14 @@ public class DefaultSwidProcessor implements SwidProcessor {
             final String softwareLicensorRegId) {
         swidTag.setSoftwareLicensor(
                 new EntityComplexType(
-                        new Token(softwareLicensorName, NULL_ID),
-                        new RegistrationId(softwareLicensorRegId, NULL_ID),
-                        NULL_ID));
+                        new Token(softwareLicensorName, idGenerator.nextId()),
+                        new RegistrationId(softwareLicensorRegId, idGenerator.nextId()),
+                        idGenerator.nextId()));
         return this;
     }
 
     /**
-     * Identifies the specific version of a specific application (software_id).
+     * Identifies the specific version of a product (tag: software_id).
      * 
      * @param uniqueId
      *            software unique ID
@@ -155,15 +160,15 @@ public class DefaultSwidProcessor implements SwidProcessor {
     public DefaultSwidProcessor setSoftwareId(final String uniqueId, final String tagCreatorRegid) {
         swidTag.setSoftwareId(
                 new SoftwareIdComplexType(
-                        new Token(uniqueId, NULL_ID),
-                        new RegistrationId(tagCreatorRegid, NULL_ID),
-                        NULL_ID));
+                        new Token(uniqueId, idGenerator.nextId()),
+                        new RegistrationId(tagCreatorRegid, idGenerator.nextId()),
+                        idGenerator.nextId()));
         return this;
     }
 
     /**
      * <p>
-     * Identifies the tag creator (tag_creator).
+     * Identifies the tag creator (tag: tag_creator).
      * </p>
      * <p>
      * Example data format: <i>“regid.2010-04.com.labs64,NLIC”</i> where:
@@ -187,9 +192,9 @@ public class DefaultSwidProcessor implements SwidProcessor {
     public DefaultSwidProcessor setTagCreator(final String tagCreatorName, final String tagCreatorRegId) {
         swidTag.setTagCreator(
                 new EntityComplexType(
-                        new Token(tagCreatorName, NULL_ID),
-                        new RegistrationId(tagCreatorRegId, NULL_ID),
-                        NULL_ID));
+                        new Token(tagCreatorName, idGenerator.nextId()),
+                        new RegistrationId(tagCreatorRegId, idGenerator.nextId()),
+                        idGenerator.nextId()));
         return this;
     }
 

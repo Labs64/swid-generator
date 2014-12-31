@@ -12,19 +12,16 @@
  */
 package com.labs64.utils.swid.processor;
 
-import org.iso.standards.iso._19770.__2._2009.schema.SoftwareIdentificationTagComplexType;
-
 /**
- * Interface for SWID Tags processors. Given source is processed and converted into the common SWID tag object
- * {@link SoftwareIdentificationTagComplexType}.
+ * Interface for generate of SWID Tags elements identifiers.
  */
-public interface SwidProcessor {
+public interface IdGenerator {
 
     /**
-     * Process the provided source, returning a SWID tag object.
+     * Return next element identifier.
      * 
-     * @return SWID tag object.
+     * @return next element identifier.
      */
-    SoftwareIdentificationTagComplexType process();
+    String nextId();
 
 }

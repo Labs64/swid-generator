@@ -16,12 +16,18 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
 import javax.xml.transform.stream.StreamSource;
 
 import org.apache.commons.lang3.StringUtils;
@@ -113,4 +119,28 @@ public final class JAXBUtils {
         return destination.toString();
     }
 
+    /**
+     * Convert {@link Date} to {@link XMLGregorianCalendar}.
+     * 
+     * @param date
+     *            XML entity
+     */
+    public static XMLGregorianCalendar convertDateToXMLGregorianCalendar(final Date date) {
+        try {
+            GregorianCalendar cal = new GregorianCalendar();
+            cal.setTime(date);
+            XMLGregorianCalendar calXml = DatatypeFactory.newInstance().newXMLGregorianCalendar(
+                    cal.get(Calendar.YEAR),
+                    cal.get(Calendar.MONTH) + 1,
+                    cal.get(Calendar.DAY_OF_MONTH),
+                    cal.get(Calendar.HOUR_OF_DAY),
+                    cal.get(Calendar.MINUTE),
+                    cal.get(Calendar.SECOND),
+                    cal.get(Calendar.MILLISECOND),
+                    0);
+            return calXml;
+        } catch (DatatypeConfigurationException e) {
+            throw new SwidException("Cannot convert date", e);
+        }
+    }
 }

@@ -12,6 +12,8 @@
  */
 package com.labs64.utils.swid.processor;
 
+import java.util.Date;
+
 import org.iso.standards.iso._19770.__2._2009.schema.ObjectFactory;
 import org.iso.standards.iso._19770.__2._2009.schema.SoftwareIdentificationTagComplexType;
 import org.junit.Before;
@@ -67,7 +69,15 @@ public class ExtendedSwidProcessorTest {
                 .setTagCreator("Labs64", regid);
         // set extended optional properties
         underTest.setKeywords("TryAndBuy", "Subscription", "Rental", "Floating", "etc.")
-                .setAbstracts("Innovative License Management Solution");
+                .setAbstract("Innovative License Management Solution", "Application Licensing for Professionals")
+                .setDataSource("https://netlicensing.labs64.com/")
+                .setProductFamily("Online License Management")
+                .setProductId("NLIC", "LMB")
+                .setReleaseDate(new Date())
+                .setReleaseId("2.2.0-Final")
+                .setSerialNumber("SN-0123456789")
+                .setSku("SKU-0123456789")
+                .setSupportedLanguages("en", "de", "ru");
 
         SoftwareIdentificationTagComplexType swidElement = underTest.process();
         assertNotNull(swidElement);
