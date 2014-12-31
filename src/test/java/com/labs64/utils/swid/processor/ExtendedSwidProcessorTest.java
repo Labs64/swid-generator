@@ -26,11 +26,11 @@ import static org.junit.Assert.assertNotNull;
 
 /**
  */
-public class DefaultSwidProcessorTest {
+public class ExtendedSwidProcessorTest {
 
     private static ObjectFactory objectFactory;
 
-    private DefaultSwidProcessor underTest;
+    private ExtendedSwidProcessor underTest;
 
     @BeforeClass
     public static void setup() {
@@ -39,7 +39,7 @@ public class DefaultSwidProcessorTest {
 
     @Before
     public void setUp() {
-        underTest = new DefaultSwidProcessor();
+        underTest = new ExtendedSwidProcessor();
     }
 
     @Test(expected = SwidException.class)
@@ -57,6 +57,7 @@ public class DefaultSwidProcessorTest {
     @Test
     public void testProcessorFull() {
         final String regid = SwidUtils.generateRegId("2010-04", "com.labs64");
+        // set mandatory properties (see also com.labs64.utils.swid.processor.DefaultSwidProcessor)
         underTest.setEntitlementRequiredIndicator(true)
                 .setProductTitle("NetLicensing")
                 .setProductVersion("2.2.0", 2, 2, 0, 0)
@@ -64,6 +65,9 @@ public class DefaultSwidProcessorTest {
                 .setSoftwareLicensor("Labs64", regid)
                 .setSoftwareId("NLIC", regid)
                 .setTagCreator("Labs64", regid);
+        // set extended optional properties
+        underTest.setKeywords("TryAndBuy", "Subscription", "Rental", "Floating", "etc.")
+                .setAbstracts("Innovative License Management Solution");
 
         SoftwareIdentificationTagComplexType swidElement = underTest.process();
         assertNotNull(swidElement);

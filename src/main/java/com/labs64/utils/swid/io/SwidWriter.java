@@ -13,6 +13,7 @@
 package com.labs64.utils.swid.io;
 
 import java.io.File;
+import java.util.Date;
 
 import org.iso.standards.iso._19770.__2._2009.schema.ObjectFactory;
 import org.iso.standards.iso._19770.__2._2009.schema.SoftwareIdentificationTagComplexType;
@@ -41,7 +42,7 @@ public class SwidWriter {
      *             If any of the method parameters are null
      */
     public void write(final SoftwareIdentificationTagComplexType swidTag, final java.io.OutputStream output) {
-        JAXBUtils.writeObject(objectFactory.createSoftwareIdentificationTag(swidTag), output);
+        JAXBUtils.writeObject(objectFactory.createSoftwareIdentificationTag(swidTag), output, getComment());
     }
 
     /**
@@ -58,7 +59,7 @@ public class SwidWriter {
      *             If any of the method parameters are null
      */
     public void write(final SoftwareIdentificationTagComplexType swidTag, final File file) {
-        JAXBUtils.writeObject(objectFactory.createSoftwareIdentificationTag(swidTag), file);
+        JAXBUtils.writeObject(objectFactory.createSoftwareIdentificationTag(swidTag), file, getComment());
     }
 
     /**
@@ -75,7 +76,16 @@ public class SwidWriter {
      *             If any of the method parameters are null
      */
     public void write(final SoftwareIdentificationTagComplexType swidTag, final java.io.Writer writer) {
-        JAXBUtils.writeObject(objectFactory.createSoftwareIdentificationTag(swidTag), writer);
+        JAXBUtils.writeObject(objectFactory.createSoftwareIdentificationTag(swidTag), writer, getComment());
+    }
+
+    private String getComment() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("\n");
+        sb.append("<!-- Created by:   SoftWare IDentification (SWID) Tags Generator -->").append("\n");
+        sb.append("<!-- Creator URL:  http://l64.cc/swid -->").append("\n");
+        sb.append("<!-- Created Date: " + new Date().toString() + " -->").append("\n");
+        return sb.toString();
     }
 
 }

@@ -24,14 +24,13 @@ import org.iso.standards.iso._19770.__2._2009.schema.UInt;
 import com.labs64.utils.swid.exception.SwidException;
 
 /**
- * Default SWID tag processor creates SWID tag with pre-defined mandatory elements. See ISO/IEC 19770-2:2009 for
- * guidance.
+ * Default SWID tag processor creates SWID tag with pre-defined mandatory elements.
+ * 
+ * @see <a href="http://www.iso.org/iso/catalogue_detail.htm?csnumber=53670">ISO/IEC 19770-2:2009</a> for guidance.
  */
 public class DefaultSwidProcessor implements SwidProcessor {
 
-    private static final String NULL_ID = null;
-
-    private SoftwareIdentificationTagComplexType swidTag;
+    protected final SoftwareIdentificationTagComplexType swidTag;
 
     /**
      * Creates SWID Tag default processor.

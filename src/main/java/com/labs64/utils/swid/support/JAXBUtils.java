@@ -24,6 +24,8 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.stream.StreamSource;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.labs64.utils.swid.exception.SwidException;
 
 /**
@@ -58,12 +60,14 @@ public final class JAXBUtils {
      * @param destination
      *            destination to write to. Supported destinations: {@link java.io.OutputStream}, {@link java.io.File},
      *            {@link java.io.Writer}
+     * @param comment
+     *            optional comment which will be added at the begining of the generated XML
      * @throws IllegalArgumentException
      * @throws SwidException
      * @param <T>
      *            JAXB entity
      */
-    public static <T> void writeObject(final T entity, final Object destination) {
+    public static <T> void writeObject(final T entity, final Object destination, final String comment) {
         try {
             JAXBContext jaxbContext;
             if (entity instanceof JAXBElement) {
@@ -74,6 +78,10 @@ public final class JAXBUtils {
 
             Marshaller marshaller = jaxbContext.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+
+            if (StringUtils.isNotBlank(comment)) {
+                marshaller.setProperty("com.sun.xml.internal.bind.xmlHeaders", comment);
+            }
 
             if (destination instanceof java.io.OutputStream) {
                 marshaller.marshal(entity, (OutputStream) destination);
@@ -101,7 +109,7 @@ public final class JAXBUtils {
      */
     public static <T> String writeObjectToString(final T entity) {
         ByteArrayOutputStream destination = new ByteArrayOutputStream();
-        writeObject(entity, destination);
+        writeObject(entity, destination, null);
         return destination.toString();
     }
 

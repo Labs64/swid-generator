@@ -20,6 +20,8 @@ import org.iso.standards.iso._19770.__2._2009.schema.SoftwareIdentificationTagCo
  */
 public interface SwidProcessor {
 
+    static final String NULL_ID = null;
+
     /**
      * Process the provided source, returning a SWID tag object.
      * 
