@@ -40,9 +40,8 @@ public class DefaultSwidProcessor implements SwidProcessor {
      * Creates SWID Tag default processor.
      */
     public DefaultSwidProcessor() {
-        idGenerator = new NullIdGenerator();
         swidTag = new SoftwareIdentificationTagComplexType();
-        swidTag.setId(idGenerator.nextId());
+        setGenerator(new NullIdGenerator());
     }
 
     /**
@@ -54,6 +53,7 @@ public class DefaultSwidProcessor implements SwidProcessor {
     public void setGenerator(final IdGenerator generator) {
         if (generator != null) {
             this.idGenerator = generator;
+            swidTag.setId(idGenerator.nextId());
         }
     }
 
