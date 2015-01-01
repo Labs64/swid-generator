@@ -26,6 +26,7 @@ import org.junit.Test;
 
 import com.labs64.utils.swid.exception.SwidException;
 import com.labs64.utils.swid.support.JAXBUtils;
+import com.labs64.utils.swid.support.SequentialIdGenerator;
 import com.labs64.utils.swid.support.SwidUtils;
 
 import static org.junit.Assert.assertNotNull;
@@ -62,6 +63,7 @@ public class ExtendedSwidProcessorTest {
 
     @Test
     public void testProcessorFull() {
+        underTest.setGenerator(new SequentialIdGenerator(0, 1, "nlic", null));
         final String regid = SwidUtils.generateRegId("2010-04", "com.labs64");
         // set mandatory properties (see also com.labs64.utils.swid.processor.DefaultSwidProcessor)
         underTest.setEntitlementRequiredIndicator(true)

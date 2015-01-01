@@ -20,6 +20,7 @@ import org.junit.Test;
 
 import com.labs64.utils.swid.exception.SwidException;
 import com.labs64.utils.swid.support.JAXBUtils;
+import com.labs64.utils.swid.support.SequentialIdGenerator;
 import com.labs64.utils.swid.support.SwidUtils;
 
 import static org.junit.Assert.assertNotNull;
@@ -56,6 +57,7 @@ public class DefaultSwidProcessorTest {
 
     @Test
     public void testProcessorFull() {
+        underTest.setGenerator(new SequentialIdGenerator());
         final String regid = SwidUtils.generateRegId("2010-04", "com.labs64");
         underTest.setEntitlementRequiredIndicator(true)
                 .setProductTitle("NetLicensing")

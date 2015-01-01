@@ -25,6 +25,7 @@ import com.labs64.utils.swid.io.SwidWriter;
 import com.labs64.utils.swid.processor.DefaultSwidProcessor;
 import com.labs64.utils.swid.processor.SwidProcessor;
 import com.labs64.utils.swid.support.JAXBUtils;
+import com.labs64.utils.swid.support.SequentialIdGenerator;
 import com.labs64.utils.swid.support.SwidUtils;
 
 import static org.junit.Assert.assertNotNull;
@@ -81,6 +82,7 @@ public class SwidBuilderTest {
         // prepare SWID Tag processor
         final String regid = SwidUtils.generateRegId("2010-04", "com.labs64");
         SwidProcessor processor = new DefaultSwidProcessor();
+        ((DefaultSwidProcessor) processor).setGenerator(new SequentialIdGenerator(0, 1, "e", null));
         ((DefaultSwidProcessor) processor).setEntitlementRequiredIndicator(true)
                 .setProductTitle("NetLicensing")
                 .setProductVersion("2.1.0", 2, 1, 0, 0)
