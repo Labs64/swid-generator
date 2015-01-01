@@ -22,6 +22,8 @@ import org.iso.standards.iso._19770.__2._2009.schema.Token;
 import org.iso.standards.iso._19770.__2._2009.schema.UInt;
 
 import com.labs64.utils.swid.exception.SwidException;
+import com.labs64.utils.swid.support.IdGenerator;
+import com.labs64.utils.swid.support.NullIdGenerator;
 
 /**
  * Default SWID tag processor creates SWID tag with pre-defined mandatory elements.

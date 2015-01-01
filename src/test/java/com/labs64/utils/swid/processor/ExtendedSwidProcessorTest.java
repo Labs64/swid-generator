@@ -12,7 +12,11 @@
  */
 package com.labs64.utils.swid.processor;
 
+import java.math.BigInteger;
 import java.util.Date;
+
+import javax.xml.bind.JAXBElement;
+import javax.xml.namespace.QName;
 
 import org.iso.standards.iso._19770.__2._2009.schema.ObjectFactory;
 import org.iso.standards.iso._19770.__2._2009.schema.SoftwareIdentificationTagComplexType;
@@ -62,27 +66,35 @@ public class ExtendedSwidProcessorTest {
         // set mandatory properties (see also com.labs64.utils.swid.processor.DefaultSwidProcessor)
         underTest.setEntitlementRequiredIndicator(true)
                 .setProductTitle("NetLicensing")
-                .setProductVersion("2.2.0", 2, 2, 0, 0)
+                .setProductVersion("2.1.0", 2, 1, 0, 0)
                 .setSoftwareCreator("Labs64", regid)
                 .setSoftwareLicensor("Labs64", regid)
                 .setSoftwareId("NLIC", regid)
                 .setTagCreator("Labs64", regid);
         // set extended optional properties
-        underTest.setKeywords("TryAndBuy", "Subscription", "Rental", "Floating", "etc.")
+        underTest
+                .setKeywords("TryAndBuy", "Subscription", "Rental", "Floating", "etc.")
                 .setAbstract("Innovative License Management Solution", "Application Licensing for Professionals")
                 .setDataSource("https://netlicensing.labs64.com/")
                 .setProductFamily("Online License Management")
                 .setProductId("NLIC", "LMB")
+                .setProductCategory("16.0901", "81", "11", "20", "01", BigInteger.valueOf(81112001))
                 .setReleaseDate(new Date())
-                .setReleaseId("2.2.0-Final")
+                .setReleaseId("2.1.0-Final")
                 .setSerialNumber("SN-0123456789")
                 .setSku("SKU-0123456789")
-                .setSupportedLanguages("en", "de", "ru");
+                .setSupportedLanguages("en", "de", "ru")
+                .setExtendedInformation(
+                        new JAXBElement(
+                                new QName("http://netlicensing.labs64.com/schema/context/netlicensing-context-2.1.xsd",
+                                        "netlicensing"),
+                                String.class,
+                                null,
+                                "NetLicensing Schema"));
 
         SoftwareIdentificationTagComplexType swidElement = underTest.process();
         assertNotNull(swidElement);
         final String out = JAXBUtils.writeObjectToString(objectFactory.createSoftwareIdentificationTag(swidElement));
         System.out.println(out);
     }
-
 }

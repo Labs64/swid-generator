@@ -1,4 +1,4 @@
-package com.labs64.utils.swid.processor;
+package com.labs64.utils.swid.support;
 
 /**
  * This generator always returns <code>null</code> as element identifier.

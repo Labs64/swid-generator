@@ -36,7 +36,7 @@ To generate SoftWare IDentification (SWID) Tag ([gist](https://gist.github.com/r
 SwidProcessor processor = new DefaultSwidProcessor();
 ((DefaultSwidProcessor) processor).setEntitlementRequiredIndicator(true)
         .setProductTitle("NetLicensing")
-        .setProductVersion("2.2.0", 2, 2, 0, 0)
+        .setProductVersion("2.1.0", 2, 1, 0, 0)
         .setSoftwareCreator("Labs64", "regid.2010-04.com.labs64")
         .setSoftwareLicensor("Labs64", "regid.2010-04.com.labs64")
         .setSoftwareId("NLIC", "regid.2010-04.com.labs64")
@@ -61,10 +61,10 @@ System.out.println(out);
     <entitlement_required_indicator>true</entitlement_required_indicator>
     <product_title>NetLicensing</product_title>
     <product_version>
-        <name>2.2.0</name>
+        <name>2.1.0</name>
         <numeric>
             <major>2</major>
-            <minor>2</minor>
+            <minor>1</minor>
             <build>0</build>
             <review>0</review>
         </numeric>

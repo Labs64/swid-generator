@@ -50,7 +50,7 @@ public class SwidWriterTest {
     @Test
     public void testWriteFile() {
         final String regid = SwidUtils.generateRegId("2010-04", "com.labs64");
-        final String tagFile = SwidUtils.generateSwidFileName(regid, "NetLicensing", "220");
+        final String tagFile = SwidUtils.generateSwidFileName(regid, "NetLicensing", "210");
         File destination = new File("target/" + tagFile);
         underTest.write(new SoftwareIdentificationTagComplexType(), destination);
         assertTrue(destination.length() > 0);

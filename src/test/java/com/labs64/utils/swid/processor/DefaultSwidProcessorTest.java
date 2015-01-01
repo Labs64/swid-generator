@@ -59,7 +59,7 @@ public class DefaultSwidProcessorTest {
         final String regid = SwidUtils.generateRegId("2010-04", "com.labs64");
         underTest.setEntitlementRequiredIndicator(true)
                 .setProductTitle("NetLicensing")
-                .setProductVersion("2.2.0", 2, 2, 0, 0)
+                .setProductVersion("2.1.0", 2, 1, 0, 0)
                 .setSoftwareCreator("Labs64", regid)
                 .setSoftwareLicensor("Labs64", regid)
                 .setSoftwareId("NLIC", regid)

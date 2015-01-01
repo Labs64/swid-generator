@@ -55,15 +55,15 @@ public class SwidUtilsTest {
     @Test
     public void testGenerateSwidFileName() {
         final String regid = SwidUtils.generateRegId("2010-04", "com.labs64");
-        assertEquals("regid.2010-04.com.labs64_NetLicensing-220.swidtag",
-                SwidUtils.generateSwidFileName(regid, "NetLicensing", "220"));
+        assertEquals("regid.2010-04.com.labs64_NetLicensing-210.swidtag",
+                SwidUtils.generateSwidFileName(regid, "NetLicensing", "210"));
     }
 
     @Test
     public void testGenerateSwidFileNameExtension() {
         final String regid = SwidUtils.generateRegId("2010-04", "com.labs64");
-        assertEquals("regid.2010-04.com.labs64_NetLicensing-220.swidtag",
-                SwidUtils.generateSwidFileName(regid, "NetLicensing", "220", SwidUtils.SWIDTAG_FILE_EXTENSION));
+        assertEquals("regid.2010-04.com.labs64_NetLicensing-210.swidtag",
+                SwidUtils.generateSwidFileName(regid, "NetLicensing", "210", SwidUtils.SWIDTAG_FILE_EXTENSION));
     }
 
     @Test

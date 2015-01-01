@@ -12,14 +12,20 @@
  */
 package com.labs64.utils.swid.processor;
 
+import java.math.BigInteger;
 import java.util.Date;
 
+import javax.xml.bind.JAXBElement;
+
 import org.iso.standards.iso._19770.__2._2009.schema.AbstractComplexType;
+import org.iso.standards.iso._19770.__2._2009.schema.CategoryComplexType;
 import org.iso.standards.iso._19770.__2._2009.schema.DateTime;
+import org.iso.standards.iso._19770.__2._2009.schema.ExtendedInformationComplexType;
 import org.iso.standards.iso._19770.__2._2009.schema.KeywordsComplexType;
 import org.iso.standards.iso._19770.__2._2009.schema.SoftwareIdentificationTagComplexType;
 import org.iso.standards.iso._19770.__2._2009.schema.SupportedLanguagesComplexType;
 import org.iso.standards.iso._19770.__2._2009.schema.Token;
+import org.iso.standards.iso._19770.__2._2009.schema.UnspscIdType;
 
 import com.labs64.utils.swid.support.JAXBUtils;
 
@@ -114,6 +120,40 @@ public class ExtendedSwidProcessor extends DefaultSwidProcessor {
     }
 
     /**
+     * Defines product category (tag: product_category).
+     * 
+     * @see <a href="http://en.wikipedia.org/wiki/UNSPSC">United Nations Standard Products and Services Code
+     *      (UNSPSC)</a> for guidance.
+     * 
+     * @param unspscVer
+     *            UNSPSC version
+     * @param segmentTitle
+     *            segment title
+     * @param familyTitle
+     *            family title
+     * @param classTitle
+     *            class title
+     * @param commodityTitle
+     *            commodity title
+     * @param code
+     *            UNSPSC code
+     * @return a reference to this object.
+     */
+    public ExtendedSwidProcessor setProductCategory(final String unspscVer, final String segmentTitle,
+            final String familyTitle, final String classTitle, final String commodityTitle, final BigInteger code) {
+        final CategoryComplexType cct = new CategoryComplexType(
+                new Token(unspscVer, idGenerator.nextId()),
+                new Token(segmentTitle, idGenerator.nextId()),
+                new Token(familyTitle, idGenerator.nextId()),
+                new Token(classTitle, idGenerator.nextId()),
+                new Token(commodityTitle, idGenerator.nextId()),
+                new UnspscIdType(code, idGenerator.nextId()),
+                idGenerator.nextId());
+        swidTag.setProductCategory(cct);
+        return this;
+    }
+
+    /**
      * Defines product release date (tag: release_date).
      * 
      * @param releaseDate
@@ -177,6 +217,24 @@ public class ExtendedSwidProcessor extends DefaultSwidProcessor {
             }
         }
         swidTag.setSupportedLanguages(slct);
+        return this;
+    }
+
+    /**
+     * Defines product extended information (tag: extended_information).
+     * 
+     * @param extendedInformationList
+     *            product extended information
+     * @return a reference to this object.
+     */
+    public ExtendedSwidProcessor setExtendedInformation(final JAXBElement<Object>... extendedInformationList) {
+        ExtendedInformationComplexType eict = new ExtendedInformationComplexType();
+        if (extendedInformationList.length > 0) {
+            for (JAXBElement<Object> extendedInformation : extendedInformationList) {
+                eict.getAny().add(extendedInformation);
+            }
+        }
+        swidTag.getExtendedInformation().add(eict);
         return this;
     }
 
