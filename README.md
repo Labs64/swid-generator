@@ -16,14 +16,14 @@ Maven:
   <dependency>
     <groupId>com.labs64.utils</groupId>
     <artifactId>swid-generator</artifactId>
-    <version>0.1.0</version>
+    <version>0.2.0</version>
   </dependency>
 </dependencies>
 ```
 Gradle:
 ```gradle
 dependencies {
-    compile 'com.labs64.utils:swid-generator:0.1.0'
+    compile 'com.labs64.utils:swid-generator:0.2.0'
 }
 ```
 
