@@ -92,3 +92,6 @@ System.out.println(out);
 ## Compatibility
 
 This library requires J2SE 1.6 or never. All dependencies are handled by Maven.
+
+## Links
+- SoftWare IDentification (SWID) Tags Generator (Maven Plugin): https://github.com/Labs64/swid-maven-plugin
