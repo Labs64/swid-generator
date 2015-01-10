@@ -7,6 +7,10 @@
 
 Generate SoftWare IDentification (SWID) Tags according to [ISO/IEC 19770-2:2009](http://www.iso.org/iso/home/store/catalogue_tc/catalogue_detail.htm?csnumber=53670)
 
+## What are SWID Tags?
+
+Software identification tags (SWID tags) record unique information about an installed software application, including its name, edition, version, whether it’s part of a bundle and more. SWID tags support software inventory and asset management initiatives. The structure of SWID tags is specified in international standard [ISO/IEC 19770-2:2009](http://www.iso.org/iso/home/store/catalogue_tc/catalogue_detail.htm?csnumber=53670).
+
 ## Quick Start
 
 The recommended way to get started using [`swid-generator`](https://maven-badges.herokuapp.com/maven-central/com.labs64.utils/swid-generator) in your project is by adding it as dependency in your build system:
