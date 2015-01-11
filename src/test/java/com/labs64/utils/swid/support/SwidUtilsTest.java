@@ -12,6 +12,8 @@
  */
 package com.labs64.utils.swid.support;
 
+import java.text.SimpleDateFormat;
+
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -30,6 +32,19 @@ public class SwidUtilsTest {
 
     @Before
     public void setUp() {
+    }
+
+    @Test
+    public void testGenerateDomainDate() throws Exception {
+        String date_s = "2010-04-13 01:02:03.0";
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+
+        assertEquals("2010-04", SwidUtils.generateDomainDate(dateFormat.parse(date_s)));
+    }
+
+    @Test(expected = SwidException.class)
+    public void testGenerateDomainDateNull() {
+        assertEquals("regid.null.null", SwidUtils.generateDomainDate(null));
     }
 
     @Test

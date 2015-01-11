@@ -10,7 +10,7 @@
     <packaging>jar</packaging>
     <name>Labs64 :: Utils :: SWID Tags Generator</name>
     <url>https://github.com/Labs64/swid-generator/</url>
-    <description>Software Identification (SWID) Tags Generator</description>
+    <description>SoftWare IDentification (SWID) Tags Generator</description>
     <inceptionYear>2015</inceptionYear>
 
     <organization>

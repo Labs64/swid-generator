@@ -14,6 +14,8 @@ package com.labs64.utils.swid.support;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -29,17 +31,33 @@ public final class SwidUtils {
     private static final String DELIMITER = ".";
 
     /**
+     * Generate domain date in format <code>'yyyy-MM'</code>.
+     * 
+     * @param domainDate
+     *            the domain date
+     * @return generated domain date in format <code>'yyyy-MM'</code>; e.g. <code>'2010-04'</code>
+     */
+    public static String generateDomainDate(final Date domainDate) {
+        if (domainDate == null) {
+            throw new SwidException("domainDate isn't defined");
+        }
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM");
+        return dateFormat.format(domainDate);
+    }
+
+    /**
      * Generate RegId.
      * 
      * @param domainCreationDate
      *            the date at which the entity creating the regid first owned the domain that is also used in the regid
      *            in year-month format; e.g. 2010-04
-     * @param domainName
+     * @param reverseDomainName
      *            the domain of the entity, in reverse order; e.g. com.labs64
      * @return generated RegId
      */
-    public static String generateRegId(final String domainCreationDate, final String domainName) {
-        return generateRegId(domainCreationDate, domainName, null);
+    public static String generateRegId(final String domainCreationDate, final String reverseDomainName) {
+        return generateRegId(domainCreationDate, reverseDomainName, null);
     }
 
     /**
@@ -48,18 +66,19 @@ public final class SwidUtils {
      * @param domainCreationDate
      *            the date at which the entity creating the regid first owned the domain that is also used in the regid
      *            in year-month format; e.g. 2010-04
-     * @param domainName
+     * @param reverseDomainName
      *            the domain of the entity, in reverse order; e.g. com.labs64
      * @param suffix
      *            additional sub-entities that are added as a suffix to the RegId
      * @return generated RegId
      */
-    public static String generateRegId(final String domainCreationDate, final String domainName, final String suffix) {
+    public static String generateRegId(final String domainCreationDate, final String reverseDomainName,
+            final String suffix) {
         if (StringUtils.isBlank(domainCreationDate)) {
             throw new SwidException("domainCreationDate isn't defined");
         }
-        if (StringUtils.isBlank(domainName)) {
-            throw new SwidException("domainName isn't defined");
+        if (StringUtils.isBlank(reverseDomainName)) {
+            throw new SwidException("reverseDomainName isn't defined");
         }
 
         StringBuilder res = new StringBuilder()
@@ -67,7 +86,7 @@ public final class SwidUtils {
                 .append(DELIMITER)
                 .append(domainCreationDate)
                 .append(DELIMITER)
-                .append(domainName);
+                .append(reverseDomainName);
         if (StringUtils.isNotBlank(suffix)) {
             res.append(",").append(suffix);
         }
