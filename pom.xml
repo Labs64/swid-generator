@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.labs64.utils</groupId>
@@ -224,6 +225,14 @@
                 </executions>
                 <configuration>
                     <schemaDirectory>${project.build.directory}/classes/schema</schemaDirectory>
+                    <schemaIncludes>
+                        <include>**/schema*.xsd</include>
+                    </schemaIncludes>
+                    <catalog>${project.build.directory}/classes/schema/xmldsig.cat</catalog>
+                    <!-- Using catalogs to resolve schema URI in strict mode is known to be problematic and may fail.
+                         Please refer to the following link for more information:
+                         https://github.com/highsource/maven-jaxb2-plugin/wiki/Catalogs-in-Strict-Mode -->
+                    <strict>false</strict>
                     <!-- see also https://java.net/jira/browse/MAVEN_JAXB2_PLUGIN-89 -->
                     <specVersion>2.1</specVersion>
                     <extension>true</extension>
