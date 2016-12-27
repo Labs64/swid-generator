@@ -2,7 +2,6 @@
 
 [![Stories in Ready](https://badge.waffle.io/labs64/swid-generator.svg?label=ready&title=Ready)](http://waffle.io/labs64/swid-generator)
 [![Build Status](https://travis-ci.org/Labs64/swid-generator.svg)](https://travis-ci.org/Labs64/swid-generator)
-[![Dependency Status](https://www.versioneye.com/user/projects/547b7586b22f9052cf0000f4/badge.svg?style=flat)](https://www.versioneye.com/user/projects/547b7586b22f9052cf0000f4)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.labs64.utils/swid-generator/badge.svg?style=flat)](https://maven-badges.herokuapp.com/maven-central/com.labs64.utils/swid-generator)
 
 Generate SoftWare IDentification (SWID) Tags according to [ISO/IEC 19770-2:2009](http://www.iso.org/iso/home/store/catalogue_tc/catalogue_detail.htm?csnumber=53670)
