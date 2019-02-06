@@ -86,7 +86,7 @@ public final class JAXBUtils {
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
             if (StringUtils.isNotBlank(comment)) {
-                marshaller.setProperty("com.sun.xml.internal.bind.xmlHeaders", comment);
+                marshaller.setProperty("com.sun.xml.bind.xmlHeaders", comment);
             }
 
             if (destination instanceof java.io.OutputStream) {
