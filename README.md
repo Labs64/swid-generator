@@ -1,6 +1,5 @@
 # SoftWare IDentification (SWID) Tags Generator
 
-[![Stories in Ready](https://badge.waffle.io/labs64/swid-generator.svg?label=ready&title=Ready)](http://waffle.io/labs64/swid-generator)
 [![Build Status](https://travis-ci.org/Labs64/swid-generator.svg)](https://travis-ci.org/Labs64/swid-generator)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.labs64.utils/swid-generator/badge.svg?style=flat)](https://maven-badges.herokuapp.com/maven-central/com.labs64.utils/swid-generator)
 
