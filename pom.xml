@@ -63,7 +63,7 @@
         <project.title>${project.name}</project.title>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <java.version>1.6</java.version>
+        <java.version>1.8</java.version>
         <maven.version>3.0.4</maven.version>
 
         <repo.releases.url>OVERRIDE_REPO_URL</repo.releases.url>
@@ -83,7 +83,7 @@
         <maven-release-plugin.version>2.5.3</maven-release-plugin.version>
         <nexus-staging-maven-plugin.version>1.6.8</nexus-staging-maven-plugin.version>
         <maven-source-plugin.version>3.0.1</maven-source-plugin.version>
-        <maven-javadoc-plugin.version>3.0.1</maven-javadoc-plugin.version>
+        <maven-javadoc-plugin.version>3.1.1</maven-javadoc-plugin.version>
         <maven-dependency-plugin.version>3.1.1</maven-dependency-plugin.version>
         <maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
         <maven-jaxb2-plugin.version>0.14.0</maven-jaxb2-plugin.version>
@@ -176,6 +176,8 @@
                             <goal>jar</goal>
                         </goals>
                         <configuration>
+                            <source>${java.version}</source>
+                            <excludePackageNames>org.w3._2000._09.xmldsig_</excludePackageNames>
                             <failOnError>false</failOnError>
                             <doclint>none</doclint>
                         </configuration>
