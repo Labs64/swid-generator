@@ -12,7 +12,6 @@
  */
 package com.labs64.utils.swid.processor;
 
-//import org.iso.standards.iso._19770.__2._2009.schema.SoftwareIdentificationTagComplexType;
 import org.iso.standards.iso._19770.__2._2014_dis.schema.SoftwareIdentity;
 
 /**

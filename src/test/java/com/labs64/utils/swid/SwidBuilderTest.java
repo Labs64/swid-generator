@@ -33,9 +33,6 @@ import java.util.Date;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-//import org.iso.standards.iso._19770.__2._2009.schema.ObjectFactory;
-//import org.iso.standards.iso._19770.__2._2009.schema.SoftwareIdentificationTagComplexType;
-
 /**
  */
 public class SwidBuilderTest {

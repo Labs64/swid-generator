@@ -21,21 +21,53 @@ public class EntityBuilder extends BaseElementBuilder<Entity, EntityBuilder> {
         return this;
     }
 
+    /**
+     * Sets the value of the name property.
+     *
+     * @param name
+     *     allowed object is
+     *     {@link String }
+     *
+     */
     public EntityBuilder name(String name) {
         item.setName(name);
         return this;
     }
 
+    /**
+     * Sets the value of the regid property.
+     *
+     * @param regid
+     *     allowed object is
+     *     {@link String }
+     *
+     */
     public EntityBuilder regid(String regid) {
         item.setRegid(regid);
         return this;
     }
 
+    /**
+     * Adds a role to the entity.
+     *
+     * @param role
+     *     allowed object is
+     *     {@link String }
+     *
+     */
     public EntityBuilder role(String role) {
         item.getRole().add(role);
         return this;
     }
 
+    /**
+     * Adds a list of roles to the entity.
+     *
+     * @param role
+     *     allowed object is
+     *     {@link List<String> }
+     *
+     */
     public EntityBuilder role(List<String> role) {
         if (role != null) {
             item.getRole().addAll(role);
@@ -43,6 +75,14 @@ public class EntityBuilder extends BaseElementBuilder<Entity, EntityBuilder> {
         return this;
     }
 
+    /**
+     * Sets the value of the thumbprint property.
+     *
+     * @param thumbprint
+     *     allowed object is
+     *     {@link String }
+     *
+     */
     public EntityBuilder thumbprint(String thumbprint) {
         item.setThumbprint(thumbprint);
         return this;

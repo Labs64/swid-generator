@@ -24,8 +24,6 @@ import java.io.StringWriter;
 
 import static org.junit.Assert.assertTrue;
 
-//import org.iso.standards.iso._19770.__2._2009.schema.SoftwareIdentificationTagComplexType;
-
 /**
  */
 public class SwidWriterTest {
