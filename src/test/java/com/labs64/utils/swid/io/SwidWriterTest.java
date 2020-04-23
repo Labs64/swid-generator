@@ -12,18 +12,19 @@
  */
 package com.labs64.utils.swid.io;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.StringWriter;
-
-import org.iso.standards.iso._19770.__2._2009.schema.SoftwareIdentificationTagComplexType;
+import com.labs64.utils.swid.support.SwidUtils;
+import org.iso.standards.iso._19770.__2._2014_dis.schema.SoftwareIdentity;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.labs64.utils.swid.support.SwidUtils;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.StringWriter;
 
 import static org.junit.Assert.assertTrue;
+
+//import org.iso.standards.iso._19770.__2._2009.schema.SoftwareIdentificationTagComplexType;
 
 /**
  */
@@ -43,7 +44,7 @@ public class SwidWriterTest {
     @Test
     public void testWriteOutputStream() {
         ByteArrayOutputStream destination = new ByteArrayOutputStream();
-        underTest.write(new SoftwareIdentificationTagComplexType(), destination);
+        underTest.write(new SoftwareIdentity(), destination);
         assertTrue(destination.size() > 0);
     }
 
@@ -52,14 +53,14 @@ public class SwidWriterTest {
         final String regid = SwidUtils.generateRegId("2010-04", "com.labs64");
         final String tagFile = SwidUtils.generateSwidFileName(regid, "NetLicensing", "210");
         File destination = new File("target/" + tagFile);
-        underTest.write(new SoftwareIdentificationTagComplexType(), destination);
+        underTest.write(new SoftwareIdentity(), destination);
         assertTrue(destination.length() > 0);
     }
 
     @Test
     public void testWriteWriter() {
         StringWriter destination = new StringWriter();
-        underTest.write(new SoftwareIdentificationTagComplexType(), destination);
+        underTest.write(new SoftwareIdentity(), destination);
         assertTrue(destination.toString().length() > 0);
     }
 

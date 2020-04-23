@@ -237,42 +237,67 @@
                 <artifactId>maven-dependency-plugin</artifactId>
                 <version>${maven-dependency-plugin.version}</version>
             </plugin>
+            <!--<plugin>-->
+                <!--<groupId>org.jvnet.jaxb2.maven2</groupId>-->
+                <!--<artifactId>maven-jaxb2-plugin</artifactId>-->
+                <!--<version>${maven-jaxb2-plugin.version}</version>-->
+                <!--<executions>-->
+                    <!--<execution>-->
+                        <!--<phase>process-resources</phase>-->
+                        <!--<goals>-->
+                            <!--<goal>generate</goal>-->
+                        <!--</goals>-->
+                    <!--</execution>-->
+                <!--</executions>-->
+                <!--<configuration>-->
+                    <!--<schemaDirectory>${project.build.directory}/classes/schema</schemaDirectory>-->
+                    <!--<schemaIncludes>-->
+                        <!--&lt;!&ndash;<include>**/schema*.xsd</include>&ndash;&gt;-->
+                        <!--<include>**/*.xsd</include>-->
+                    <!--</schemaIncludes>-->
+                    <!--&lt;!&ndash;<catalog>${project.build.directory}/classes/schema/xmldsig.cat</catalog>&ndash;&gt;-->
+                    <!--&lt;!&ndash; Using catalogs to resolve schema URI in strict mode is known to be problematic and may fail.-->
+                         <!--Please refer to the following link for more information:-->
+                         <!--https://github.com/highsource/maven-jaxb2-plugin/wiki/Catalogs-in-Strict-Mode &ndash;&gt;-->
+                    <!--&lt;!&ndash;<strict>false</strict>&ndash;&gt;-->
+                    <!--&lt;!&ndash; see also https://java.net/jira/browse/MAVEN_JAXB2_PLUGIN-89 &ndash;&gt;-->
+                    <!--<specVersion>2.1</specVersion>-->
+                    <!--<extension>true</extension>-->
+                    <!--<args>-->
+                        <!--<arg>-Xvalue-constructor</arg>-->
+                    <!--</args>-->
+                    <!--<plugins>-->
+                        <!--<plugin>-->
+                            <!--<groupId>org.jvnet.jaxb2_commons</groupId>-->
+                            <!--<artifactId>jaxb2-value-constructor</artifactId>-->
+                            <!--<version>3.0</version>-->
+                        <!--</plugin>-->
+                    <!--</plugins>-->
+                <!--</configuration>-->
+            <!--</plugin>-->
             <plugin>
                 <groupId>org.jvnet.jaxb2.maven2</groupId>
                 <artifactId>maven-jaxb2-plugin</artifactId>
-                <version>${maven-jaxb2-plugin.version}</version>
                 <executions>
                     <execution>
-                        <phase>process-resources</phase>
+                        <id>swid</id>
                         <goals>
                             <goal>generate</goal>
                         </goals>
+                        <configuration>
+                            <schemaDirectory>src/main/resources/schema</schemaDirectory>
+                            <schemaIncludes>
+                                <include>**/*.xsd</include>
+                            </schemaIncludes>
+                            <!--<generateDirectory>${project.build.directory}/generated-sources/swid</generateDirectory>-->
+                            <!--<generatePackage>nl.politie.vergunningmodule.swid</generatePackage>-->
+                            <extension>true</extension>
+                            <args>
+                                <arg>-npa</arg>
+                            </args>
+                        </configuration>
                     </execution>
                 </executions>
-                <configuration>
-                    <schemaDirectory>${project.build.directory}/classes/schema</schemaDirectory>
-                    <schemaIncludes>
-                        <include>**/schema*.xsd</include>
-                    </schemaIncludes>
-                    <catalog>${project.build.directory}/classes/schema/xmldsig.cat</catalog>
-                    <!-- Using catalogs to resolve schema URI in strict mode is known to be problematic and may fail.
-                         Please refer to the following link for more information:
-                         https://github.com/highsource/maven-jaxb2-plugin/wiki/Catalogs-in-Strict-Mode -->
-                    <strict>false</strict>
-                    <!-- see also https://java.net/jira/browse/MAVEN_JAXB2_PLUGIN-89 -->
-                    <specVersion>2.1</specVersion>
-                    <extension>true</extension>
-                    <args>
-                        <arg>-Xvalue-constructor</arg>
-                    </args>
-                    <plugins>
-                        <plugin>
-                            <groupId>org.jvnet.jaxb2_commons</groupId>
-                            <artifactId>jaxb2-value-constructor</artifactId>
-                            <version>3.0</version>
-                        </plugin>
-                    </plugins>
-                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>

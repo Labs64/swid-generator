@@ -12,17 +12,16 @@
  */
 package com.labs64.utils.swid.io;
 
+import com.labs64.utils.swid.support.JAXBUtils;
+import org.iso.standards.iso._19770.__2._2014_dis.schema.ObjectFactory;
+import org.iso.standards.iso._19770.__2._2014_dis.schema.SoftwareIdentity;
+
 import java.io.File;
 import java.util.Date;
 
-import org.iso.standards.iso._19770.__2._2009.schema.ObjectFactory;
-import org.iso.standards.iso._19770.__2._2009.schema.SoftwareIdentificationTagComplexType;
-
-import com.labs64.utils.swid.support.JAXBUtils;
-
 /**
  * A writer for SoftWare IDentification (SWID) Tags
- * {@link org.iso.standards.iso._19770.__2._2009.schema.SoftwareIdentificationTagComplexType}.
+ * {@link org.iso.standards.iso._19770.__2._2014_dis.schema.SoftwareIdentity}.
  */
 public class SwidWriter {
 
@@ -41,8 +40,8 @@ public class SwidWriter {
      * @throws IllegalArgumentException
      *             If any of the method parameters are null
      */
-    public void write(final SoftwareIdentificationTagComplexType swidTag, final java.io.OutputStream output) {
-        JAXBUtils.writeObject(objectFactory.createSoftwareIdentificationTag(swidTag), output, getComment());
+    public void write(final SoftwareIdentity swidTag, final java.io.OutputStream output) {
+        JAXBUtils.writeObject(objectFactory.createSoftwareIdentity(swidTag), output, getComment());
     }
 
     /**
@@ -58,8 +57,8 @@ public class SwidWriter {
      * @throws IllegalArgumentException
      *             If any of the method parameters are null
      */
-    public void write(final SoftwareIdentificationTagComplexType swidTag, final File file) {
-        JAXBUtils.writeObject(objectFactory.createSoftwareIdentificationTag(swidTag), file, getComment());
+    public void write(final SoftwareIdentity swidTag, final File file) {
+        JAXBUtils.writeObject(objectFactory.createSoftwareIdentity(swidTag), file, getComment());
     }
 
     /**
@@ -75,8 +74,8 @@ public class SwidWriter {
      * @throws IllegalArgumentException
      *             If any of the method parameters are null
      */
-    public void write(final SoftwareIdentificationTagComplexType swidTag, final java.io.Writer writer) {
-        JAXBUtils.writeObject(objectFactory.createSoftwareIdentificationTag(swidTag), writer, getComment());
+    public void write(final SoftwareIdentity swidTag, final java.io.Writer writer) {
+        JAXBUtils.writeObject(objectFactory.createSoftwareIdentity(swidTag), writer, getComment());
     }
 
     private String getComment() {
@@ -84,7 +83,7 @@ public class SwidWriter {
         sb.append("\n");
         sb.append("<!-- Created by:   SoftWare IDentification (SWID) Tags Generator -->").append("\n");
         sb.append("<!-- Creator URL:  http://l64.cc/swid -->").append("\n");
-        sb.append("<!-- Created Date: " + new Date().toString() + " -->").append("\n");
+        sb.append("<!-- Created Date: ").append(new Date().toString()).append(" -->").append("\n");
         return sb.toString();
     }
 

@@ -12,24 +12,29 @@
  */
 package com.labs64.utils.swid;
 
-import java.io.StringWriter;
-
-import org.iso.standards.iso._19770.__2._2009.schema.ObjectFactory;
-import org.iso.standards.iso._19770.__2._2009.schema.SoftwareIdentificationTagComplexType;
+import com.labs64.utils.swid.builder.*;
+import com.labs64.utils.swid.exception.SwidException;
+import com.labs64.utils.swid.io.SwidWriter;
+import com.labs64.utils.swid.processor.DefaultSwidProcessor;
+import com.labs64.utils.swid.support.JAXBUtils;
+import com.labs64.utils.swid.support.SequentialIdGenerator;
+import com.labs64.utils.swid.support.SwidUtils;
+import org.iso.standards.iso._19770.__2._2014_dis.schema.ObjectFactory;
+import org.iso.standards.iso._19770.__2._2014_dis.schema.SoftwareIdentity;
+import org.iso.standards.iso._19770.__2._2014_dis.schema.VersionScheme;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.labs64.utils.swid.exception.SwidException;
-import com.labs64.utils.swid.io.SwidWriter;
-import com.labs64.utils.swid.processor.DefaultSwidProcessor;
-import com.labs64.utils.swid.processor.SwidProcessor;
-import com.labs64.utils.swid.support.JAXBUtils;
-import com.labs64.utils.swid.support.SequentialIdGenerator;
-import com.labs64.utils.swid.support.SwidUtils;
+import java.io.StringWriter;
+import java.math.BigInteger;
+import java.util.Date;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+
+//import org.iso.standards.iso._19770.__2._2009.schema.ObjectFactory;
+//import org.iso.standards.iso._19770.__2._2009.schema.SoftwareIdentificationTagComplexType;
 
 /**
  */
@@ -51,12 +56,7 @@ public class SwidBuilderTest {
 
     @Test
     public void testBuild() {
-        assertNotNull(underTest.build(new SwidProcessor() {
-            @Override
-            public SoftwareIdentificationTagComplexType process() {
-                return new SoftwareIdentificationTagComplexType();
-            }
-        }));
+        assertNotNull(underTest.build(() -> new SoftwareIdentity()));
     }
 
     @Test(expected = SwidException.class)
@@ -66,34 +66,54 @@ public class SwidBuilderTest {
 
     @Test
     public void testBuildWriteToString() {
-        SoftwareIdentificationTagComplexType swidElement = underTest.build(new SwidProcessor() {
-            @Override
-            public SoftwareIdentificationTagComplexType process() {
-                return new SoftwareIdentificationTagComplexType();
-            }
-        });
-        final String out = JAXBUtils.writeObjectToString(objectFactory.createSoftwareIdentificationTag(swidElement));
+        SoftwareIdentity swidElement = underTest.build(() -> new SoftwareIdentity());
+        final String out = JAXBUtils.writeObjectToString(objectFactory.createSoftwareIdentity(swidElement));
         System.out.println(out);
-        assertTrue(out.contains("software_identification_tag"));
+        assertTrue(out.contains("SoftwareIdentity"));
     }
 
     @Test
     public void testBuilderUseCase() {
         // prepare SWID Tag processor
         final String regid = SwidUtils.generateRegId("2010-04", "com.labs64");
-        SwidProcessor processor = new DefaultSwidProcessor();
-        ((DefaultSwidProcessor) processor).setGenerator(new SequentialIdGenerator(0, 1, "e", null));
-        ((DefaultSwidProcessor) processor).setEntitlementRequiredIndicator(true)
-                .setProductTitle("NetLicensing")
-                .setProductVersion("2.1.0", 2, 1, 0, 0)
-                .setSoftwareCreator("Labs64", regid)
-                .setSoftwareLicensor("Labs64", regid)
-                .setSoftwareId("NLIC", regid)
-                .setTagCreator("Labs64", regid);
+        DefaultSwidProcessor processor = new DefaultSwidProcessor();
+        processor.setGenerator(new SequentialIdGenerator(0, 1, "e", null));
+        processor.setName("NetLicensing")
+                .setVersion("2.1.0")
+                .setVersionScheme(VersionScheme.UNKNOWN)
+                .setSupplemental(true)
+                .addEntity(new EntityBuilder().name("Labs64")
+                        .role("softwareCreator")
+                        .role("softwareLicensor")
+                        .role("tagCreator")
+                        .build())
+                .addLink(new LinkBuilder().rel("supplemental")
+                        .href("swid:other-swid-tag")
+                        .build())
+                .addMetaData(new SoftwareMetaBuilder().description("This is what it's about")
+                        .entitlementDataRequired(true)
+                        .revision("3")
+                        .build())
+                .addEvidence(new EvidenceBuilder()
+                        .deviceId("123-a")
+                        .date(new Date())
+                        .directoryOrFileOrProcess(new FileBuilder()
+                                .name("File.xml")
+                                .size(BigInteger.TEN)
+                                .version("3")
+                                .build())
+                        .build())
+                .addPayload(new PayloadBuilder()
+                        .directory(new DirectoryBuilder()
+                                .root("/data")
+                                .key(true)
+                                .location("/folder")
+                                .build())
+                        .build());
 
         // create builder and pass processor as build param
         SwidBuilder builder = new SwidBuilder();
-        SoftwareIdentificationTagComplexType swidTag = builder.build(processor);
+        SoftwareIdentity swidTag = builder.build(processor);
 
         // output resulting object
         SwidWriter writer = new SwidWriter();

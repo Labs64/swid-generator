@@ -12,11 +12,12 @@
  */
 package com.labs64.utils.swid.processor;
 
-import org.iso.standards.iso._19770.__2._2009.schema.SoftwareIdentificationTagComplexType;
+//import org.iso.standards.iso._19770.__2._2009.schema.SoftwareIdentificationTagComplexType;
+import org.iso.standards.iso._19770.__2._2014_dis.schema.SoftwareIdentity;
 
 /**
  * Interface for SWID Tags processors. Given source is processed and converted into the common SWID tag object
- * {@link SoftwareIdentificationTagComplexType}.
+ * {@link SoftwareIdentity}.
  */
 public interface SwidProcessor {
 
@@ -25,6 +26,6 @@ public interface SwidProcessor {
      * 
      * @return SWID tag object.
      */
-    SoftwareIdentificationTagComplexType process();
+    SoftwareIdentity process();
 
 }
