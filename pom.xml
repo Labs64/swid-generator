@@ -5,7 +5,7 @@
 
     <groupId>com.labs64.utils</groupId>
     <artifactId>swid-generator</artifactId>
-    <version>0.4.0-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
 
     <packaging>jar</packaging>
     <name>Labs64 :: Utils :: SWID Tags Generator</name>
@@ -15,13 +15,13 @@
 
     <organization>
         <name>Labs64 GmbH</name>
-        <url>http://www.labs64.com</url>
+        <url>https://www.labs64.com</url>
     </organization>
 
     <licenses>
         <license>
             <name>Apache License 2.0</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
+            <url>https://www.apache.org/licenses/LICENSE-2.0.html</url>
             <distribution>repo</distribution>
         </license>
     </licenses>
@@ -54,7 +54,7 @@
             </roles>
             <url>https://www.linkedin.com/in/averikhin</url>
             <organization>Labs64 GmbH</organization>
-            <organizationUrl>http://www.labs64.de</organizationUrl>
+            <organizationUrl>https://www.labs64.de</organizationUrl>
             <timezone>+1</timezone>
         </developer>
     </developers>

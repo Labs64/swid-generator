@@ -2,7 +2,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -26,7 +26,7 @@ import java.util.Map;
 /**
  * Default SWID tag processor creates SWID tag with pre-defined mandatory elements.
  * 
- * @see <a href="http://www.iso.org/iso/catalogue_detail.htm?csnumber=65666">ISO/IEC 19770-2:2015</a> for guidance.
+ * @see <a href="https://www.iso.org/standard/65666.html">ISO/IEC 19770-2:2015</a> for guidance.
  */
 public class DefaultSwidProcessor implements SwidProcessor {
 
