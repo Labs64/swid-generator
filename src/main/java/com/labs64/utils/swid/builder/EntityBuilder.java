@@ -91,10 +91,10 @@ public class EntityBuilder extends BaseElementBuilder<Entity, EntityBuilder> {
     @Override
     protected void validate() {
         if (StringUtils.isBlank(item.getName())) {
-            throw new SwidException("'item.name' is not set");
+            throw new SwidException("'entity.name' is not set");
         }
         if (item.getRole().isEmpty()) {
-            throw new SwidException("'item.role' is not set");
+            throw new SwidException("'entity.role' is not set");
         }
     }
 
