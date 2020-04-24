@@ -104,3 +104,25 @@ This library requires J2SE 1.8 or newer. All dependencies are handled by Maven.
 
 ## Links
 - SoftWare IDentification (SWID) Tags Generator (Maven Plugin): https://github.com/Labs64/swid-maven-plugin
+
+
+## Contributing
+
+Fork the repository and make some changes. Once you're done with your changes send a pull request and check [CI validation status](https://travis-ci.org/github/Labs64/swid-generator/).
+Thanks!
+
+### Contributors and Supporters
+
+Thank you to all the [contributors](https://github.com/Labs64/swid-generator/graphs/contributors) on this project. Your help is much appreciated!
+
+- [GuideChimp](https://github.com/Labs64/GuideChimp) - A simple, lightweight, clean and small library for creating guided product tours for your web app.
+- [@henryean](https://github.com/henryean) - Upgrade library to the next specification version [ISO/IEC 19770-2:2015](https://www.iso.org/standard/65666.html)
+
+
+## Bugs and Feedback
+
+For bugs, questions and discussions please use the [GitHub Issues](https://github.com/Labs64/swid-generator/issues).
+
+## License
+
+This boilerplate is open-sourced software licensed under the [Apache License 2.0](LICENSE).
