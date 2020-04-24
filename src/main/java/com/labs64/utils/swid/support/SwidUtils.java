@@ -12,15 +12,14 @@
  */
 package com.labs64.utils.swid.support;
 
+import com.labs64.utils.swid.exception.SwidException;
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
+
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
-
-import com.labs64.utils.swid.exception.SwidException;
 
 /**
  * Support class provides convenient methods for working with SWID entities.
@@ -50,10 +49,10 @@ public final class SwidUtils {
      * Generate RegId.
      * 
      * @param domainCreationDate
-     *            the date at which the entity creating the regid first owned the domain that is also used in the regid
+     *            the date at which the item creating the regid first owned the domain that is also used in the regid
      *            in year-month format; e.g. 2010-04
      * @param reverseDomainName
-     *            the domain of the entity, in reverse order; e.g. com.labs64
+     *            the domain of the item, in reverse order; e.g. com.labs64
      * @return generated RegId
      */
     public static String generateRegId(final String domainCreationDate, final String reverseDomainName) {
@@ -64,10 +63,10 @@ public final class SwidUtils {
      * Generate RegId with additional suffix.
      * 
      * @param domainCreationDate
-     *            the date at which the entity creating the regid first owned the domain that is also used in the regid
+     *            the date at which the item creating the regid first owned the domain that is also used in the regid
      *            in year-month format; e.g. 2010-04
      * @param reverseDomainName
-     *            the domain of the entity, in reverse order; e.g. com.labs64
+     *            the domain of the item, in reverse order; e.g. com.labs64
      * @param suffix
      *            additional sub-entities that are added as a suffix to the RegId
      * @return generated RegId
