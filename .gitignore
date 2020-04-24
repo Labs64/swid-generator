@@ -9,7 +9,7 @@
 *.war
 *.ear
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+# virtual machine crash logs, see https://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 
 target
@@ -21,6 +21,9 @@ target
 .project
 bin/**
 .settings/
+
+# VSCode
+.vscode
 
 # External tool builders
 .externalToolBuilders/

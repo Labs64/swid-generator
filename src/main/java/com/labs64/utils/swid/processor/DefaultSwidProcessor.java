@@ -2,7 +2,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -12,27 +12,25 @@
  */
 package com.labs64.utils.swid.processor;
 
-import org.iso.standards.iso._19770.__2._2009.schema.EntityComplexType;
-import org.iso.standards.iso._19770.__2._2009.schema.NumericVersionComplexType;
-import org.iso.standards.iso._19770.__2._2009.schema.ProductVersionComplexType;
-import org.iso.standards.iso._19770.__2._2009.schema.RegistrationId;
-import org.iso.standards.iso._19770.__2._2009.schema.SoftwareIdComplexType;
-import org.iso.standards.iso._19770.__2._2009.schema.SoftwareIdentificationTagComplexType;
-import org.iso.standards.iso._19770.__2._2009.schema.Token;
-import org.iso.standards.iso._19770.__2._2009.schema.UInt;
-
+import com.labs64.utils.swid.builder.*;
 import com.labs64.utils.swid.exception.SwidException;
 import com.labs64.utils.swid.support.IdGenerator;
 import com.labs64.utils.swid.support.NullIdGenerator;
+import org.iso.standards.iso._19770.__2._2014_dis.schema.*;
+import org.w3._2000._09.xmldsig_.SignatureType;
+
+import javax.xml.namespace.QName;
+import java.math.BigInteger;
+import java.util.Map;
 
 /**
  * Default SWID tag processor creates SWID tag with pre-defined mandatory elements.
  * 
- * @see <a href="http://www.iso.org/iso/catalogue_detail.htm?csnumber=53670">ISO/IEC 19770-2:2009</a> for guidance.
+ * @see <a href="https://www.iso.org/standard/65666.html">ISO/IEC 19770-2:2015</a> for guidance.
  */
 public class DefaultSwidProcessor implements SwidProcessor {
 
-    protected final SoftwareIdentificationTagComplexType swidTag;
+    protected final SoftwareIdentity swidTag;
 
     protected IdGenerator idGenerator;
 
@@ -40,8 +38,56 @@ public class DefaultSwidProcessor implements SwidProcessor {
      * Creates SWID Tag default processor.
      */
     public DefaultSwidProcessor() {
-        swidTag = new SoftwareIdentificationTagComplexType();
+        swidTag = new SoftwareIdentity();
         setGenerator(new NullIdGenerator());
+    }
+
+    /**
+     * Sets the value of the lang property.
+     *
+     * @param lang
+     *     allowed object is
+     *     {@link String }
+     * @return a reference to this object.
+     */
+    public DefaultSwidProcessor lang(String lang) {
+        swidTag.setLang(lang);
+        return this;
+    }
+
+    /**
+     * Attributes that aren't bound to any typed property on this class.
+     *
+     * <p>
+     * the map is keyed by the name of the attribute and
+     * the value is the string value of the attribute.
+     * </p>
+     *
+     * @param key the name of the attribute {@link QName}
+     * @param value the String value of the attribute
+     * @return a reference to this object.
+     */
+    public DefaultSwidProcessor otherAttributes(QName key, String value) {
+        swidTag.getOtherAttributes().put(key, value);
+        return this;
+    }
+
+    /**
+     * Attributes that aren't bound to any typed property on this class.
+     *
+     * <p>
+     * the map is keyed by the name of the attribute and
+     * the value is the string value of the attribute.
+     * </p>
+     *
+     * @param otherAttributes a map containing key/value pairs of attributes to be added to the tag.
+     * @return a reference to this object.
+     */
+    public DefaultSwidProcessor otherAttributes(Map<QName, String> otherAttributes) {
+        if (otherAttributes != null) {
+            swidTag.getOtherAttributes().putAll(otherAttributes);
+        }
+        return this;
     }
 
     /**
@@ -53,162 +99,218 @@ public class DefaultSwidProcessor implements SwidProcessor {
     public void setGenerator(final IdGenerator generator) {
         if (generator != null) {
             this.idGenerator = generator;
-            swidTag.setId(idGenerator.nextId());
+            swidTag.setTagId(idGenerator.nextId());
         }
     }
 
     /**
      * <p>
-     * Identifies whether this product needs to match up with an entitlement for a reconciliation to be considered
-     * successful (tag: entitlement_required_indicator).
-     * </p>
-     * <p>
-     * Specifies if an entitlement is required to reconcile this product. Example data format: XX = entitlement status (
-     * <code>true</code> = entitlement required; <code>false</code> = no entitlement required).
+     * Accurately identifies the product (tag: name).
      * </p>
      * 
-     * @param entitlementRequiredIndicator
-     *            entitlements required indicator
-     * @return a reference to this object.
-     */
-    public DefaultSwidProcessor setEntitlementRequiredIndicator(final boolean entitlementRequiredIndicator) {
-        swidTag.setEntitlementRequiredIndicator(
-                new org.iso.standards.iso._19770.__2._2009.schema.Boolean(entitlementRequiredIndicator, idGenerator
-                        .nextId()));
-        return this;
-    }
-
-    /**
-     * <p>
-     * Accurately identifies the product (tag: product_title).
-     * </p>
-     * 
-     * @param productTitle
+     * @param name
      *            product title
      * @return a reference to this object.
      */
-    public DefaultSwidProcessor setProductTitle(final String productTitle) {
-        swidTag.setProductTitle(
-                new Token(productTitle, idGenerator.nextId()));
+    public DefaultSwidProcessor setName(final String name) {
+        swidTag.setName(name);
         return this;
     }
 
     /**
-     * Identifies the product version (tag: product_version) using two values – numeric version and version string.
+     * Identifies the product version (tag: version) using version string.
      * 
      * @param productVersion
      *            product version
-     * @param productVersionMajor
-     *            product major version
-     * @param productVersionMinor
-     *            product minor version
-     * @param productVersionBuild
-     *            product build version
-     * @param productVersionReview
-     *            product review version
      * @return a reference to this object.
      */
-    public DefaultSwidProcessor setProductVersion(final String productVersion,
-            final long productVersionMajor,
-            final long productVersionMinor,
-            final long productVersionBuild,
-            final long productVersionReview) {
-        final NumericVersionComplexType numericVersion = new NumericVersionComplexType(
-                new UInt(productVersionMajor, idGenerator.nextId()),
-                new UInt(productVersionMinor, idGenerator.nextId()),
-                new UInt(productVersionBuild, idGenerator.nextId()),
-                new UInt(productVersionReview, idGenerator.nextId()),
-                idGenerator.nextId());
-        swidTag.setProductVersion(
-                new ProductVersionComplexType(
-                        new Token(productVersion, idGenerator.nextId()), numericVersion, idGenerator.nextId()));
+    public DefaultSwidProcessor setVersion(final String productVersion) {
+        swidTag.setVersion(productVersion);
         return this;
     }
 
     /**
-     * Identifies the creator of the software (tag: software_creator).
-     * 
-     * @param softwareCreatorName
-     *            software creator name
-     * @param softwareCreatorRegId
-     *            software creator registration ID
+     * Identifies the tag id (tag: tagId) using id string.
+     *
+     * @param tagId
+     *            tag ID
      * @return a reference to this object.
      */
-    public DefaultSwidProcessor setSoftwareCreator(final String softwareCreatorName, final String softwareCreatorRegId) {
-        swidTag.setSoftwareCreator(
-                new EntityComplexType(
-                        new Token(softwareCreatorName, idGenerator.nextId()),
-                        new RegistrationId(softwareCreatorRegId, idGenerator.nextId()),
-                        idGenerator.nextId()));
+    public DefaultSwidProcessor setTagId(final String tagId) {
+        if (tagId != null) {
+            swidTag.setTagId(tagId);
+        }
         return this;
     }
 
     /**
-     * Identifies the licensor of the software (tag: software_licensor).
-     * 
-     * @param softwareLicensorName
-     *            software licensor name
-     * @param softwareLicensorRegId
-     *            software licensor registration ID
+     * Identifies the tag version (tag: tagVersion) using version int.
+     *
+     * @param tagVersion
+     *            product version
      * @return a reference to this object.
      */
-    public DefaultSwidProcessor setSoftwareLicensor(final String softwareLicensorName,
-            final String softwareLicensorRegId) {
-        swidTag.setSoftwareLicensor(
-                new EntityComplexType(
-                        new Token(softwareLicensorName, idGenerator.nextId()),
-                        new RegistrationId(softwareLicensorRegId, idGenerator.nextId()),
-                        idGenerator.nextId()));
+    public DefaultSwidProcessor setTagVersion(final BigInteger tagVersion) {
+        swidTag.setTagVersion(tagVersion);
         return this;
     }
 
     /**
-     * Identifies the specific version of a product (tag: software_id).
-     * 
-     * @param uniqueId
-     *            software unique ID
-     * @param tagCreatorRegid
-     *            tag creator registration ID
+     * Identifies whether the swid is corpus (tag: corpus) using boolean.
+     *
+     * @param corpus
+     *            is corpus
      * @return a reference to this object.
      */
-    public DefaultSwidProcessor setSoftwareId(final String uniqueId, final String tagCreatorRegid) {
-        swidTag.setSoftwareId(
-                new SoftwareIdComplexType(
-                        new Token(uniqueId, idGenerator.nextId()),
-                        new RegistrationId(tagCreatorRegid, idGenerator.nextId()),
-                        idGenerator.nextId()));
+    public DefaultSwidProcessor setCorpus(final Boolean corpus) {
+        swidTag.setCorpus(corpus);
+        return this;
+    }
+
+    /**
+     * Identifies whether the swid is supplemental (tag: supplemental) using boolean.
+     *
+     * @param supplemental
+     *            is supplemental
+     * @return a reference to this object.
+     */
+    public DefaultSwidProcessor setSupplemental(final Boolean supplemental) {
+        swidTag.setSupplemental(supplemental);
+        return this;
+    }
+
+    /**
+     * Identifies whether the swid is patch (tag: patch) using boolean.
+     *
+     * @param patch
+     *            is patch
+     * @return a reference to this object.
+     */
+    public DefaultSwidProcessor setPatch(final Boolean patch) {
+        swidTag.setPatch(patch);
+        return this;
+    }
+
+    /**
+     * Identifies the Version scheme (tag: versionScheme) using {@link VersionScheme}.
+     *
+     * @param versionScheme
+     *            {@link VersionScheme}
+     * @return a reference to this object.
+     */
+    public DefaultSwidProcessor setVersionScheme(VersionScheme versionScheme) {
+        swidTag.setVersionScheme(versionScheme);
+        return this;
+    }
+
+    /**
+     * Identifies the media (tag: media) as a String.
+     *
+     * @param media
+     *            media from the tag
+     * @return a reference to this object.
+     */
+    public DefaultSwidProcessor setMedia(String media) {
+        swidTag.setMedia(media);
         return this;
     }
 
     /**
      * <p>
-     * Identifies the tag creator (tag: tag_creator).
+     *     adds a {@link ResourceCollection} object to the swid tag
      * </p>
      * <p>
-     * Example data format: <i>“regid.2010-04.com.labs64,NLIC”</i> where:
-     * <ul>
-     * <li>regid = registered id</li>
-     * <li>2010-04 = the year and first month the domain was registered (yyyy-mm)</li>
-     * <li>com = the upper level domain</li>
-     * <li>labs64 = the domain name</li>
-     * <li>NLIC = the name of the business unit (BU) that created the SWID tag</li>
-     * </ul>
-     * <p>
-     * Note that everything after the comma ‘,’ is optional and only required if a software title is specific
+     *     See {@link PayloadBuilder} for generating an item
      * </p>
-     * 
-     * @param tagCreatorName
-     *            tag creator name
-     * @param tagCreatorRegId
-     *            tag creator registration ID
+     *
+     * @param payload
+     *            {@link ResourceCollection}
      * @return a reference to this object.
      */
-    public DefaultSwidProcessor setTagCreator(final String tagCreatorName, final String tagCreatorRegId) {
-        swidTag.setTagCreator(
-                new EntityComplexType(
-                        new Token(tagCreatorName, idGenerator.nextId()),
-                        new RegistrationId(tagCreatorRegId, idGenerator.nextId()),
-                        idGenerator.nextId()));
+    public DefaultSwidProcessor addPayload(final ResourceCollection payload) {
+        swidTag.getEntityOrEvidenceOrLink().add(payload);
+        return this;
+    }
+
+    /**
+     * <p>
+     *     adds an {@link SoftwareMeta} object to the swid tag
+     * </p>
+     * <p>
+     *     See {@link SoftwareMetaBuilder} for generating an item
+     * </p>
+     *
+     * @param softwareMeta
+     *            {@link SoftwareMeta}
+     * @return a reference to this object.
+     */
+    public DefaultSwidProcessor addMetaData(SoftwareMeta softwareMeta) {
+        swidTag.getEntityOrEvidenceOrLink().add(softwareMeta);
+        return this;
+    }
+
+    /**
+     * <p>
+     *     adds an {@link Entity} object to the swid tag
+     * </p>
+     * <p>
+     *     See {@link EntityBuilder} for generating an item
+     * </p>
+     *
+     * @param entity
+     *            {@link Entity}
+     * @return a reference to this object.
+     */
+    public DefaultSwidProcessor addEntity(final Entity entity) {
+        swidTag.getEntityOrEvidenceOrLink().add(entity);
+        return this;
+    }
+
+    /**
+     * <p>
+     *     adds an {@link Evidence} object to the swid tag
+     * </p>
+     * <p>
+     *     See {@link EvidenceBuilder} for generating an evidence object
+     * </p>
+     *
+     * @param evidence
+     *            {@link Evidence}
+     * @return a reference to this object.
+     */
+    public DefaultSwidProcessor addEvidence(final Evidence evidence) {
+        swidTag.getEntityOrEvidenceOrLink().add(evidence);
+        return this;
+    }
+
+    /**
+     * <p>
+     *     adds an {@link Link} object to the swid tag
+     * </p>
+     * <p>
+     *     See {@link LinkBuilder} for generating an link object
+     * </p>
+     *
+     * @param link
+     *            {@link Link}
+     * @return a reference to this object.
+     */
+    public DefaultSwidProcessor addLink(final Link link) {
+        swidTag.getEntityOrEvidenceOrLink().add(link);
+        return this;
+    }
+
+    /**
+     * <p>
+     *     adds an {@link SignatureType} object to the swid tag
+     * </p>
+     *
+     * @param signature
+     *            {@link SignatureType}
+     * @return a reference to this object.
+     */
+    public DefaultSwidProcessor addSignature(final SignatureType signature) {
+        swidTag.getEntityOrEvidenceOrLink().add(signature);
         return this;
     }
 
@@ -219,31 +321,16 @@ public class DefaultSwidProcessor implements SwidProcessor {
      *             in case of invalid processor configuration
      */
     public void validate() {
-        if (swidTag.getEntitlementRequiredIndicator() == null) {
-            throw new SwidException("'entitlement_required_indicator' is not set");
-        }
-        if (swidTag.getProductTitle() == null) {
+        if (swidTag.getName() == null) {
             throw new SwidException("'product_title' is not set");
         }
-        if (swidTag.getProductVersion() == null) {
-            throw new SwidException("'product_version' is not set");
-        }
-        if (swidTag.getSoftwareCreator() == null) {
-            throw new SwidException("'software_creator' is not set");
-        }
-        if (swidTag.getSoftwareLicensor() == null) {
-            throw new SwidException("'software_licensor' is not set");
-        }
-        if (swidTag.getSoftwareId() == null) {
-            throw new SwidException("'software_id' is not set");
-        }
-        if (swidTag.getTagCreator() == null) {
-            throw new SwidException("'tag_creator' is not set");
+        if (swidTag.getTagId() == null) {
+            throw new SwidException("'tag_id' is not set");
         }
     }
 
     @Override
-    public SoftwareIdentificationTagComplexType process() {
+    public SoftwareIdentity process() {
         validate();
         return swidTag;
     }

@@ -2,7 +2,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -12,6 +12,14 @@
  */
 package com.labs64.utils.swid.support;
 
+import com.labs64.utils.swid.exception.SwidException;
+import org.apache.commons.lang3.StringUtils;
+
+import javax.xml.bind.*;
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
+import javax.xml.transform.stream.StreamSource;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
@@ -19,20 +27,6 @@ import java.io.OutputStream;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
-import javax.xml.datatype.DatatypeConfigurationException;
-import javax.xml.datatype.DatatypeFactory;
-import javax.xml.datatype.XMLGregorianCalendar;
-import javax.xml.transform.stream.StreamSource;
-
-import org.apache.commons.lang3.StringUtils;
-
-import com.labs64.utils.swid.exception.SwidException;
 
 /**
  * Support class provides convenient methods for working with JAXB.
@@ -59,10 +53,10 @@ public final class JAXBUtils {
     }
 
     /**
-     * Write XML entity to the given destination.
+     * Write XML item to the given destination.
      * 
      * @param entity
-     *            XML entity
+     *            XML item
      * @param destination
      *            destination to write to. Supported destinations: {@link java.io.OutputStream}, {@link java.io.File},
      *            {@link java.io.Writer}
@@ -71,7 +65,7 @@ public final class JAXBUtils {
      * @throws IllegalArgumentException
      * @throws SwidException
      * @param <T>
-     *            JAXB entity
+     *            JAXB item
      */
     public static <T> void writeObject(final T entity, final Object destination, final String comment) {
         try {
@@ -104,14 +98,14 @@ public final class JAXBUtils {
     }
 
     /**
-     * Write XML entity to the string.
+     * Write XML item to the string.
      * 
      * @param entity
-     *            XML entity
+     *            XML item
      * @throws IllegalArgumentException
      * @throws SwidException
      * @param <T>
-     *            JAXB entity
+     *            JAXB item
      */
     public static <T> String writeObjectToString(final T entity) {
         ByteArrayOutputStream destination = new ByteArrayOutputStream();
@@ -123,7 +117,7 @@ public final class JAXBUtils {
      * Convert {@link Date} to {@link XMLGregorianCalendar}.
      * 
      * @param date
-     *            XML entity
+     *            XML item
      */
     public static XMLGregorianCalendar convertDateToXMLGregorianCalendar(final Date date) {
         try {

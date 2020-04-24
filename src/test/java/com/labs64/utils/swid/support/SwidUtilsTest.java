@@ -2,7 +2,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -83,16 +83,16 @@ public class SwidUtilsTest {
 
     @Test
     public void testRevertDomainName() {
-        assertEquals("com.labs64", SwidUtils.revertDomainName("http://www.labs64.com"));
-        assertEquals("com.labs64", SwidUtils.revertDomainName("http://www.labs64.com/"));
+        assertEquals("com.labs64", SwidUtils.revertDomainName("https://www.labs64.com"));
+        assertEquals("com.labs64", SwidUtils.revertDomainName("https://www.labs64.com/"));
         assertEquals("com.labs64", SwidUtils.revertDomainName("https://www.labs64.com/"));
         assertEquals("com.labs64", SwidUtils.revertDomainName("www.labs64.com"));
         assertEquals("com.labs64", SwidUtils.revertDomainName("labs64.com"));
-        assertEquals("com.labs64", SwidUtils.revertDomainName("http://www.labs64.com/netlicensing"));
-        assertEquals("com.labs64", SwidUtils.revertDomainName("http://www.labs64.com#netlicensing"));
-        assertEquals("com.labs64", SwidUtils.revertDomainName("http://www.labs64.com?netlicensing"));
-        assertEquals("com.labs64.netlicensing", SwidUtils.revertDomainName("netlicensing.labs64.com"));
-        assertEquals("com.labs64.netlicensing", SwidUtils.revertDomainName("http://netlicensing.labs64.com"));
+        assertEquals("com.labs64", SwidUtils.revertDomainName("https://www.labs64.com/netlicensing"));
+        assertEquals("com.labs64", SwidUtils.revertDomainName("https://www.labs64.com#netlicensing"));
+        assertEquals("com.labs64", SwidUtils.revertDomainName("https://www.labs64.com?netlicensing"));
+        assertEquals("io.netlicensing", SwidUtils.revertDomainName("netlicensing.io"));
+        assertEquals("io.netlicensing", SwidUtils.revertDomainName("https://netlicensing.io"));
     }
 
     @Test(expected = SwidException.class)

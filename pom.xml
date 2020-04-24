@@ -5,7 +5,7 @@
 
     <groupId>com.labs64.utils</groupId>
     <artifactId>swid-generator</artifactId>
-    <version>0.4.0-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
 
     <packaging>jar</packaging>
     <name>Labs64 :: Utils :: SWID Tags Generator</name>
@@ -15,13 +15,13 @@
 
     <organization>
         <name>Labs64 GmbH</name>
-        <url>http://www.labs64.com</url>
+        <url>https://www.labs64.com</url>
     </organization>
 
     <licenses>
         <license>
             <name>Apache License 2.0</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
+            <url>https://www.apache.org/licenses/LICENSE-2.0.html</url>
             <distribution>repo</distribution>
         </license>
     </licenses>
@@ -54,7 +54,7 @@
             </roles>
             <url>https://www.linkedin.com/in/averikhin</url>
             <organization>Labs64 GmbH</organization>
-            <organizationUrl>http://www.labs64.de</organizationUrl>
+            <organizationUrl>https://www.labs64.de</organizationUrl>
             <timezone>+1</timezone>
         </developer>
     </developers>
@@ -240,39 +240,24 @@
             <plugin>
                 <groupId>org.jvnet.jaxb2.maven2</groupId>
                 <artifactId>maven-jaxb2-plugin</artifactId>
-                <version>${maven-jaxb2-plugin.version}</version>
                 <executions>
                     <execution>
-                        <phase>process-resources</phase>
+                        <id>swid</id>
                         <goals>
                             <goal>generate</goal>
                         </goals>
+                        <configuration>
+                            <schemaDirectory>src/main/resources/schema</schemaDirectory>
+                            <schemaIncludes>
+                                <include>**/*.xsd</include>
+                            </schemaIncludes>
+                            <extension>true</extension>
+                            <args>
+                                <arg>-npa</arg>
+                            </args>
+                        </configuration>
                     </execution>
                 </executions>
-                <configuration>
-                    <schemaDirectory>${project.build.directory}/classes/schema</schemaDirectory>
-                    <schemaIncludes>
-                        <include>**/schema*.xsd</include>
-                    </schemaIncludes>
-                    <catalog>${project.build.directory}/classes/schema/xmldsig.cat</catalog>
-                    <!-- Using catalogs to resolve schema URI in strict mode is known to be problematic and may fail.
-                         Please refer to the following link for more information:
-                         https://github.com/highsource/maven-jaxb2-plugin/wiki/Catalogs-in-Strict-Mode -->
-                    <strict>false</strict>
-                    <!-- see also https://java.net/jira/browse/MAVEN_JAXB2_PLUGIN-89 -->
-                    <specVersion>2.1</specVersion>
-                    <extension>true</extension>
-                    <args>
-                        <arg>-Xvalue-constructor</arg>
-                    </args>
-                    <plugins>
-                        <plugin>
-                            <groupId>org.jvnet.jaxb2_commons</groupId>
-                            <artifactId>jaxb2-value-constructor</artifactId>
-                            <version>3.0</version>
-                        </plugin>
-                    </plugins>
-                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -349,6 +334,13 @@
                                 <goals>
                                     <goal>sign</goal>
                                 </goals>
+                                <configuration>
+                                    <!-- This is necessary for gpg to not try to use the pinentry programs -->
+                                    <gpgArguments>
+                                        <arg>--pinentry-mode</arg>
+                                        <arg>loopback</arg>
+                                    </gpgArguments>
+                                </configuration>
                             </execution>
                         </executions>
                     </plugin>

@@ -2,7 +2,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *      https://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -12,16 +12,17 @@
  */
 package com.labs64.utils.swid.processor;
 
-import org.iso.standards.iso._19770.__2._2009.schema.ObjectFactory;
-import org.iso.standards.iso._19770.__2._2009.schema.SoftwareIdentificationTagComplexType;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
+import com.labs64.utils.swid.builder.EntityBuilder;
 import com.labs64.utils.swid.exception.SwidException;
 import com.labs64.utils.swid.support.JAXBUtils;
 import com.labs64.utils.swid.support.SequentialIdGenerator;
 import com.labs64.utils.swid.support.SwidUtils;
+import org.iso.standards.iso._19770.__2._2014_dis.schema.ObjectFactory;
+import org.iso.standards.iso._19770.__2._2014_dis.schema.SoftwareIdentity;
+import org.iso.standards.iso._19770.__2._2014_dis.schema.VersionScheme;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 import static org.junit.Assert.assertNotNull;
 
@@ -50,8 +51,7 @@ public class DefaultSwidProcessorTest {
 
     @Test(expected = SwidException.class)
     public void testProcessorIncomplete() {
-        underTest.setEntitlementRequiredIndicator(true)
-                .setProductTitle("NetLicensing");
+        underTest.setName("NetLicensing");
         underTest.process();
     }
 
@@ -59,17 +59,18 @@ public class DefaultSwidProcessorTest {
     public void testProcessorFull() {
         underTest.setGenerator(new SequentialIdGenerator());
         final String regid = SwidUtils.generateRegId("2010-04", "com.labs64");
-        underTest.setEntitlementRequiredIndicator(true)
-                .setProductTitle("NetLicensing")
-                .setProductVersion("2.1.0", 2, 1, 0, 0)
-                .setSoftwareCreator("Labs64", regid)
-                .setSoftwareLicensor("Labs64", regid)
-                .setSoftwareId("NLIC", regid)
-                .setTagCreator("Labs64", regid);
+        underTest.setName("NetLicensing")
+                .setVersion("2.1.0")
+                .addEntity(new EntityBuilder().name("Labs64")
+                        .role("softwareCreator")
+                        .role("softwareLicensor")
+                        .role("tagCreator")
+                        .build())
+                .setVersionScheme(VersionScheme.UNKNOWN);
 
-        SoftwareIdentificationTagComplexType swidElement = underTest.process();
+        SoftwareIdentity swidElement = underTest.process();
         assertNotNull(swidElement);
-        final String out = JAXBUtils.writeObjectToString(objectFactory.createSoftwareIdentificationTag(swidElement));
+        final String out = JAXBUtils.writeObjectToString(objectFactory.createSoftwareIdentity(swidElement));
         System.out.println(out);
     }
 
