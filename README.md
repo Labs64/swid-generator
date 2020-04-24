@@ -103,8 +103,8 @@ System.out.println(out);
 This library requires J2SE 1.8 or newer. All dependencies are handled by Maven.
 
 ## Links
+- Spec: IT asset management — Part 2: Software Identification Tag: https://www.iso.org/standard/65666.html
 - SoftWare IDentification (SWID) Tags Generator (Maven Plugin): https://github.com/Labs64/swid-maven-plugin
-
 
 ## Contributing
 
