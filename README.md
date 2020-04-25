@@ -108,14 +108,14 @@ This library requires J2SE 1.8 or newer. All dependencies handled by Maven.
 
 ## Contributing
 
-Fork the repository and make some changes. Once you're done with your changes send a pull request and check [CI validation status](https://travis-ci.org/github/Labs64/swid-generator/).
+Fork the repository and make some changes. Once you're done with your changes send a pull request and check [CI validation status](https://travis-ci.org/Labs64/swid-generator).
 Thanks!
 
 ### Contributors and Supporters
 
 Thank you to all the [contributors](https://github.com/Labs64/swid-generator/graphs/contributors) on this project. Your help is much appreciated!
 
-- [Labs64 NetLicensing](https://netlicensing.io) - Innovative License Management Solution
+- [Labs64 NetLicensing](https://netlicensing.io) - Innovative *License Management* Solution
 - [GuideChimp](https://github.com/Labs64/GuideChimp) - A simple, lightweight, clean and small library for creating guided product tours for your web app.
 - [@henryean](https://github.com/henryean) - Upgrade library to the next specification version [ISO/IEC 19770-2:2015](https://www.iso.org/standard/65666.html)
 
