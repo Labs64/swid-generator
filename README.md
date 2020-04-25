@@ -1,8 +1,8 @@
-# SoftWare IDentification (SWID) Tags Generator
+# SoftWare IDentification (SWID) Tags Generator (Java Library)
 
 [![Build Status](https://travis-ci.org/Labs64/swid-generator.svg)](https://travis-ci.org/Labs64/swid-generator)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.labs64.utils/swid-generator/badge.svg?style=flat)](https://maven-badges.herokuapp.com/maven-central/com.labs64.utils/swid-generator)
-[![Apache License 2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/Labs64/GuideChimp/blob/master/LICENSE)
+[![Apache License 2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/Labs64/swid-generator/blob/master/LICENSE)
 
 Generate SoftWare IDentification (SWID) Tags according to [ISO/IEC 19770-2:2015](https://www.iso.org/standard/65666.html)
 
@@ -100,7 +100,7 @@ System.out.println(out);
 
 ## Compatibility
 
-This library requires J2SE 1.8 or newer. All dependencies are handled by Maven.
+This library requires J2SE 1.8 or newer. All dependencies handled by Maven.
 
 ## Links
 - Spec: IT asset management — Part 2: Software Identification Tag: https://www.iso.org/standard/65666.html
@@ -125,4 +125,4 @@ For bugs, questions and discussions please use the [GitHub Issues](https://githu
 
 ## License
 
-This boilerplate is open-sourced software licensed under the [Apache License 2.0](LICENSE).
+This library is open-sourced software licensed under the [Apache License 2.0](LICENSE).
