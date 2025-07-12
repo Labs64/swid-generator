@@ -69,7 +69,7 @@
         <repo.snapshots.url>OVERRIDE_REPO_URL</repo.snapshots.url>
 
         <!-- dependency.version>0.0.0</dependency.version -->
-        <commons-lang3.version>3.10</commons-lang3.version>
+        <commons-lang3.version>3.18.0</commons-lang3.version>
         <commons-collections4.version>4.4</commons-collections4.version>
         <commons-codec.version>1.10</commons-codec.version>
         <log4j.version>1.2.17</log4j.version>
